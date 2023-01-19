@@ -23,7 +23,7 @@ La versión 2 implementa un contador de puntos en la parte superior del visor. C
 
 La versión 3 implementa las pastillas de invencibilidad. Son cuatro pastillas, ubicadas una en cada extremo del mapa. El pacman, al comerla, gana 6 puntos y adquiere invencibilidad por 15 movimientos. Esta invencibilidad es acumulativa (esto es, ya está invencible y come una pastilla, aumenta el tiempo de invencibilidad en 15)
 
-![](/images/v3.png)<br/>![](/images/v3_01.png)![](/images/v3_02.png)<br/>![](/images/v3_03.png)![](/images/v3_04.png)
+![](/images/v3.png)<br/>![](/images/v3_03.png) -> ![](/images/v3_04.png)
 
 ## Versión 4: mundo toroidal
 
