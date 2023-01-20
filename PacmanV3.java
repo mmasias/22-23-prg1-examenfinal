@@ -71,7 +71,7 @@ public class PacmanV3 {
                             && posicionPersonaje[1] == posicionInvencibilidad[2][1])
                     || (posicionPersonaje[0] == posicionInvencibilidad[3][0]
                             && posicionPersonaje[1] == posicionInvencibilidad[3][1])) {
-                puntos = puntos + 6;
+                puntos = puntos + 3;
                 invencible = true;
                 turnosInvencible = turnosInvencible + 15;
             }
