@@ -128,54 +128,24 @@ public class AppV5 {
         for (int laFila = 0; laFila < unaMatriz.length; laFila++) {
             for (int laColumna = 0; laColumna < unaMatriz[laFila].length; laColumna++) {
                 if (laFila == posicionPersonaje[0] && laColumna == posicionPersonaje[1]) {
-                    if (skin == 0) {
-                        System.out.print("P");
-                    } else if (skin == 1) {
-                        System.out.print("PP");
-                    } else if (skin == 2) {
-                        System.out.print("PPP");
-                    }
+                    System.out.print("P".repeat(skin + 1));
                 } else if (laFila == posicionFantasma[0] && laColumna == posicionFantasma[1]) {
-                    if (skin == 0) {
-                        System.out.print("F");
-                    } else if (skin == 1) {
-                        System.out.print("FF");
-                    } else if (skin == 2) {
-                        System.out.print("FFF");
-                    }
+                    System.out.print("F".repeat(skin + 1));
                 } else {
                     if (unaMatriz[laFila][laColumna] == 0) {
                         if (skin == 0) {
                             System.out.print(".");
                         } else if (skin == 1) {
-                            System.out.print("..");
+                            System.out.print("()");
                         } else if (skin == 2) {
                             System.out.print(" O ");
                         }
                     } else if (unaMatriz[laFila][laColumna] == 1) {
-                        if (skin == 0) {
-                            System.out.print("#");
-                        } else if (skin == 1) {
-                            System.out.print("##");
-                        } else if (skin == 2) {
-                            System.out.print("###");
-                        }
+                        System.out.print("#".repeat(skin + 1));
                     } else if (unaMatriz[laFila][laColumna] == 2) {
-                        if (skin == 0) {
-                            System.out.print(" ");
-                        } else if (skin == 1) {
-                            System.out.print("  ");
-                        } else if (skin == 2) {
-                            System.out.println("   ");
-                        }
+                        System.out.print(" ".repeat(skin + 1));
                     } else if (unaMatriz[laFila][laColumna] == 3) {
-                        if (skin == 0) {
-                            System.out.print("X");
-                        } else if (skin == 1) {
-                            System.out.println("XX");
-                        } else if (skin == 2) {
-                            System.out.println("XXX");
-                        }
+                        System.out.print("X".repeat(skin + 1));
                     }
                 }
             }
