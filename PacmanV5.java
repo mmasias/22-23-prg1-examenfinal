@@ -94,36 +94,34 @@ public class PacmanV5 {
                     terminar = true;
             }
 
-            puntos = comerPastillas(mapa, posicionPersonaje, puntos);
-            invencibilidad = comerInvencibilidad(mapa, posicionPersonaje, invencibilidad);
+            int[] dataPastillas = comerPastillas(mapa, posicionPersonaje, puntos, invencibilidad);
+            puntos = dataPastillas[0];
+            invencibilidad = dataPastillas[1];
 
         } while (!terminar);
     }
 
-    static int comerPastillas(int[][] mapa, int[] posicionPersonaje, int puntos){
+    static int[] comerPastillas(int[][] mapa, int[] posicionPersonaje, int puntos, int invencibilidad) {
 
-        if(mapa[posicionPersonaje[0]][posicionPersonaje[1]] == 2){
+        if (mapa[posicionPersonaje[0]][posicionPersonaje[1]] == 2) {
 
-             mapa[posicionPersonaje[0]][posicionPersonaje[1]] = 0;
-             puntos += 3;
+            mapa[posicionPersonaje[0]][posicionPersonaje[1]] = 0;
+            puntos += 3;
         }
 
-        return puntos;
-    }
-
-    static int comerInvencibilidad(int[][] mapa, int[] posicionPersonaje, int invencibilidad) {
-
-        if (invencibilidad > 0){
+        if (invencibilidad > 0) {
             invencibilidad -= 1;
         }
 
-        if (mapa[posicionPersonaje[0]][posicionPersonaje[1]] == 3){
+        if (mapa[posicionPersonaje[0]][posicionPersonaje[1]] == 3) {
             mapa[posicionPersonaje[0]][posicionPersonaje[1]] = 0;
             invencibilidad += 15;
+            puntos += 6;
         }
 
-        return invencibilidad;
-    }
+        int[] resultado = { puntos, invencibilidad };
 
+        return resultado;
+    }
 
 }
