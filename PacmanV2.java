@@ -70,93 +70,78 @@ public class PacmanV2 {
 
     private static void imprimeTerreno(int elementosDelMapa){
 
-        String[] terreno = { " ", "#", ".", "~ ~", "<0>", "", "oOo", " - " };
+        String[] terreno = { " ", "#", "." };
         System.out.print(terreno[elementosDelMapa]);
     }
 
 
     private static boolean procesarMovimineto(int[] posicionPersonaje, int[] posicionFantasma, int[][] unaMatriz) {
         Scanner entrada = new Scanner(System.in);
-        String inputUsuario;
+        char inputUsuario;
         char laDireccion = ' ';
-
-        inputUsuario = entrada.nextLine();
-
+        boolean terminar = false;
+        inputUsuario = entrada.nextLine().charAt(0);
+            
         switch (inputUsuario) {
-            case "w", "W":
-                laDireccion = 'N';
-                break;
-            case "a", "A":
-                laDireccion = 'O';
-                break;
-            case "s", "S":
-                laDireccion = 'S';
-                break;
-            case "d", "D":
-                laDireccion = 'E';
-                break;
-            case "f":
-                return false;
-            default:
-                System.out.println("No has introducido una tecla válida");
-                break;
-        }
+                case 's', 'S', '8':
+                    posicionPersonaje[0] = posicionPersonaje[0] + 1;
+                    laDireccion = 'S';
+                    break;
+                case 'w', 'W', '2':
+                    posicionPersonaje[0] = posicionPersonaje[0] - 1;
+                    laDireccion = 'N';
+                    break;
+                case 'a', 'A', '4':
+                    posicionPersonaje[1] = posicionPersonaje[1] - 1;
+                    laDireccion = 'O';
+                    break;
+                case 'd', 'D', '6':
+                    posicionPersonaje[1] = posicionPersonaje[1] + 1;
+                    laDireccion = 'E';
+                    break;
+                case 'f', 'F':
+                    terminar = true;
+                    break;
+                }
 
-        boolean continuar = mueve(posicionPersonaje, unaMatriz, laDireccion, false);
+                boolean continuar = true;
                 return continuar;
 
             }
 
-            private static boolean mueve(int[] posicionPersonaje, int[][] unaMatriz, char unaDireccion, boolean esNPC) {
+            private static boolean mueve(int[] posicionPersonaje, int[][] unaMatriz, char unaDireccion) {
                 int elPersonajeX, elPersonajeY;
                 elPersonajeX = posicionPersonaje[0];
                 elPersonajeY = posicionPersonaje[1];
         
                 boolean seMueve = false;
         
-                if (unaDireccion == 'O') {
-                    if (elPersonajeX == 0) {
-                        elPersonajeX = unaMatriz[0].length - 1;
-                        seMueve = true;
-                    } else if (unaMatriz[elPersonajeY][elPersonajeX - 1] % 2 == 0) {
-                        elPersonajeX = elPersonajeX - 1;
-                        seMueve = true;
-                    }
-                } else if (unaDireccion == 'N') {
-                    if (elPersonajeY == 0) {
-                        elPersonajeY = unaMatriz.length - 1;
-                        seMueve = true;
-                    } else if (unaMatriz[elPersonajeY - 1][elPersonajeX] % 2 == 0) {
-                        elPersonajeY = elPersonajeY - 1;
-                        seMueve = true;
-                    }
-                } else if (unaDireccion == 'E') {
-                    if (elPersonajeX == unaMatriz[0].length - 1) {
-                        elPersonajeX = 0;
-                        seMueve = true;
-                    } else if (unaMatriz[elPersonajeY][elPersonajeX + 1] % 2 == 0) {
-                        elPersonajeX = elPersonajeX + 1;
-                        seMueve = true;
-                    }
+                if (unaDireccion == 'N') {
+                    seMueve = true;
+
                 } else if (unaDireccion == 'S') {
-                    if (elPersonajeY == unaMatriz.length - 1) {
-                        elPersonajeY = 0;
-                        seMueve = true;
-                    } else if (unaMatriz[elPersonajeY + 1][elPersonajeX] % 2 == 0) {
-                        elPersonajeY = elPersonajeY + 1;
-                        seMueve = true;
-                    }
+        
+                    posicionPersonaje[0] = posicionPersonaje[0] + 1;
+                    seMueve = true;
+
+                } else if (unaDireccion == 'E') {
+                    
+                    posicionPersonaje[1] = posicionPersonaje[1] + 1;
+                    seMueve = true;
+                    
+                } else if (unaDireccion == 'O') {
+
+                    posicionPersonaje[1] = posicionPersonaje[1] - 1;
+                    seMueve = true;
+                    
                 }
         
                 posicionPersonaje[0] = elPersonajeX;
                 posicionPersonaje[1] = elPersonajeY;
         
-                if (!esNPC) {
+                
                     registraMovimiento(seMueve);
                     return registraPuntos(posicionPersonaje, unaMatriz);
-                } else {
-                    return true;
-                }
             }
 
             private static void registraMovimiento(boolean seMueve) {
