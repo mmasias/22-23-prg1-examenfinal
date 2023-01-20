@@ -19,11 +19,15 @@ public class Pacman {
             { 0, 1 }
     };
 
-    static int minFila, minColumna, maxFila, maxColumna;
+    static int minFila, minColumna, maxFila, maxColumna, puntos = 0;
 
     static boolean terminar = true;
 
     public static void main(String[] args) {
+
+        Scanner entrada = new Scanner(System.in);
+        char inputUsuario;
+        boolean terminar = false;
 
         int[][] unaMatriz = {
                 { 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 },
@@ -31,7 +35,7 @@ public class Pacman {
                 { 1, 0, 1, 0, 1, 0, 0, 0, 1, 1, 1, 1, 1, 0, 0, 0, 0, 1, 0, 1, 0, 1 },
                 { 1, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 1 },
                 { 1, 0, 1, 1, 1, 1, 0, 1, 1, 1, 0, 1, 1, 1, 1, 0, 1, 1, 1, 1, 0, 1 },
-                { 0, 0, 0, 0, 0, 1, 0, 1, 0, 0, 0, 0, 0, 1, 0, 0, 1, 0, 0, 0, 0, 0 },
+                { 2, 0, 0, 0, 0, 1, 0, 1, 0, 0, 0, 0, 0, 1, 0, 0, 1, 0, 0, 0, 0, 2 },
                 { 1, 0, 0, 0, 0, 1, 0, 1, 1, 1, 1, 1, 1, 1, 0, 0, 1, 0, 0, 0, 0, 1 },
                 { 1, 0, 1, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 1, 0, 1 },
                 { 1, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 1 },
@@ -44,8 +48,9 @@ public class Pacman {
         int[] posicionFantasma = { 5, 10 };
 
         do {
+            mostrarPuntos();
             imprimirMundo(unaMatriz, posicionPersonaje, posicionFantasma);
-            verDireccion(posicionPersonaje);
+            verAccion(posicionPersonaje);
         } while (!terminar);
     }
 
@@ -59,9 +64,11 @@ public class Pacman {
                     System.out.print("F");
                 } else {
                     if (unaMatriz[laFila][laColumna] == 0) {
-                        System.out.print(" ");
+                        registraPuntos(posicionPersonaje, unaMatriz);
                     } else if (unaMatriz[laFila][laColumna] == 1) {
                         System.out.print("#");
+                    } else if (unaMatriz[laFila][laColumna] == 2){
+                        System.out.print(" ");
                     }
                 }
             }
@@ -69,15 +76,15 @@ public class Pacman {
         }
     }
 
-    static void mover(int[] unPersonaje, int direccion) {
+    static void mover(int[] posicionPersonaje, int direccion) {
 
-        unPersonaje[FILA] += MOVIMIENTO[direccion][FILA];
-        unPersonaje[COLUMNA] += MOVIMIENTO[direccion][COLUMNA];
+        posicionPersonaje[FILA] += MOVIMIENTO[direccion][FILA];
+        posicionPersonaje[COLUMNA] += MOVIMIENTO[direccion][COLUMNA];
     }
 
-    static void verDireccion(int[] posicionPersonaje) {
+    static void verAccion(int[] posicionPersonaje) {
 
-        switch (obtenerMovimiento()) {
+        switch (capturarMovimiento()) {
             case ARRIBA:
                 mover(posicionPersonaje, ARRIBA);
                 break;
@@ -98,9 +105,9 @@ public class Pacman {
         }
     }
 
-    static int obtenerMovimiento() {
+    static int capturarMovimiento() {
 
-        switch (pedirMovimiento()) {
+        switch (pedirChar()) {
             case 's', 'S', '8':
                 return ABAJO;
             case 'w', 'W', '2':
@@ -115,10 +122,34 @@ public class Pacman {
         return NADA;
     }
 
-    static char pedirMovimiento() {
+    static char pedirChar() {
 
         Scanner entrada = new Scanner(System.in);
-        String inputUsuario = entrada.nextLine() + "x";
-        return inputUsuario.charAt(0);
+        String inputUsuario = entrada.nextLine() + "x"; // Este es un caso que justifica un comentario!
+        return inputUsuario.charAt(0); // Lo comentamos en clase ;)
+    }
+
+    static int registraPuntos(int[] posicionPersonaje, int[][] unaMatriz){
+
+        if(unaMatriz[posicionPersonaje[FILA]][posicionPersonaje[COLUMNA]] == 0){
+            unaMatriz[posicionPersonaje[FILA]][posicionPersonaje[COLUMNA]] = 0;
+            System.out.println(" ");
+            puntos = puntos + 3;
+        }
+        if(unaMatriz[posicionPersonaje[FILA]][posicionPersonaje[COLUMNA]] == 1){
+            unaMatriz[posicionPersonaje[FILA]][posicionPersonaje[COLUMNA]] = 1;
+            System.out.println("#");
+        }
+        else if(unaMatriz[posicionPersonaje[FILA]][posicionPersonaje[COLUMNA]] == 2){
+            unaMatriz[posicionPersonaje[FILA]][posicionPersonaje[COLUMNA]] = 0 ;
+            System.out.println(" ");
+            puntos+=5;
+        }
+
+        return puntos;
+    }
+
+    static void mostrarPuntos(){
+        System.out.println("PUNTOS " + puntos);
     }
 }
