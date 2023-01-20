@@ -1,5 +1,7 @@
-//Pablo Arce de Aldecoa 20/01/2023
-// Lo unico añadido al reto propuesto, es que al interactuar con el fantasma sin invincibilidad se acaba el juego, si tienes invencibilidad sumas 20 puntos
+// Pablo Arce de Aldecoa 20/01/2023
+// Examen final de programación I
+
+
 import java.util.*;
 public class Pacman {
     public static void main(String[] args) {
@@ -25,7 +27,7 @@ public class Pacman {
         int[] contadorPuntos = {0};
         int [] turnosInv = {0};
         boolean invencibilidad = false;
-        int [] skinActual = {0}; // hay 0, 1 y 3
+        int [] skinActual = {0}; 
         while(terminar == false){
             menus(contadorPuntos, turnosInv, skinActual);
             skins(skinActual, terreno, posPersonaje, posFantasma);
@@ -33,7 +35,7 @@ public class Pacman {
             terminar = moverse(posPersonaje, posFantasma, skinActual);
             mundoToroidal(terreno, posPersonaje);
             invencibilidad = bolaInvencibilidad(terreno, posPersonaje, contadorPuntos, turnosInv); 
-            terminar = interaccionFantasma(posFantasma, posPersonaje, contadorPuntos, invencibilidad);
+            interaccionFantasma(posFantasma, posPersonaje, contadorPuntos, invencibilidad);
             comerBolitas(terreno, posPersonaje, contadorPuntos);
         }
     }
@@ -41,7 +43,7 @@ public class Pacman {
     static void menus(int [] contadorPuntos, int [] turnosInv, int [] skinActual){
         System.out.println("= ".repeat(20));
         System.out.println("= ".repeat(20));
-        System.out.println("Puntuacion: ["+contadorPuntos[0]+"] Inv["+turnosInv[0]+"] Skin["+skinActual[0]+"] (0,1,3)");
+        System.out.println("Puntuacion: ["+contadorPuntos[0]+"] Inv["+turnosInv[0]+"] Skin["+skinActual[0]+"]");
     }
 
     static void skins(int [] skinActual, int [][] terreno, int [] posPersonaje, int [] posFantasma){
@@ -67,7 +69,7 @@ public class Pacman {
             vacio ="  ";
             bola = "><";
         }
-        if (skinActual[0] == 3){
+        if (skinActual[0] == 2){
             fantasma = "FFF";
             personaje = "PPP";
             bolitas = " O ";
@@ -120,14 +122,11 @@ public class Pacman {
                 case 'd', 'D', '6':
                     posPersonaje[1] = posPersonaje[1] + 1;
                     break;
-                case '0':
-                    skinActual[0] = 0;
-                    break;
-                case '1':
-                    skinActual[0] = 1;
-                    break;
-                case '3':
-                    skinActual[0] = 3;
+                case 'v':
+                    if (skinActual[0] == 2){
+                        skinActual[0] = 0;
+                    }
+                    else{skinActual[0]++;}
                     break;
                 case 'f', 'F':
                     return true;
@@ -155,23 +154,18 @@ public class Pacman {
         return false;
     }
 
-    static boolean interaccionFantasma(int [] posFantasma, int [] posPersonaje, int [] contadorPuntos, boolean invencibilidad){
+    static void interaccionFantasma(int [] posFantasma, int [] posPersonaje, int [] contadorPuntos, boolean invencibilidad){
         if (posFantasma[0] == posPersonaje[0] && posFantasma[1] == posPersonaje[1]){
             if (invencibilidad){
                 contadorPuntos[0]+=20;
                 posFantasma [0] = 5; 
                 posFantasma [1] = 10;
-                return false;
             }
-            return true;
         }
-        return false;
     }
 
     static void mundoToroidal(int [][] terreno, int [] posPersonaje){
-        System.out.println("hola");
         if (posPersonaje[0] == 12){
-            System.out.println("hola");
             posPersonaje[0] = 0;
         }
         else if (posPersonaje[0] == -1){
