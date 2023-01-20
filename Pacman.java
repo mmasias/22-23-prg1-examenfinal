@@ -19,7 +19,7 @@ public class Pacman {
             { 0, 1 }
     };
 
-    static int minFila, minColumna, maxFila, maxColumna, puntos = 0;
+    static int minFila, minColumna, maxFila, maxColumna, puntos = 0, invesibilidad = 0;
 
     static boolean terminar = false;
 
@@ -44,10 +44,13 @@ public class Pacman {
         int[] posicionFantasma = { 5, 10 };
 
         do {
+            if(invesibilidad > 0){
+                invesibilidad --;
+            }
+            mostrarPuntos();
             imprimirMundo(unaMatriz, posicionPersonaje, posicionFantasma);
             verAccion(posicionPersonaje);
             registrarPuntos(posicionPersonaje, unaMatriz);
-            mostrarPuntos();
         } while (!terminar);
     }
 
@@ -64,7 +67,7 @@ public class Pacman {
                         System.out.print(".");
                     } else if (unaMatriz[laFila][laColumna] == 1) {
                         System.out.print("#");
-                    } else if (unaMatriz[laFila][laColumna] == 3) {
+                    } else if (unaMatriz[laFila][laColumna] == 2) {
                         System.out.print("O");
                     }
                 }
@@ -127,11 +130,17 @@ public class Pacman {
     }
 
     static int registrarPuntos(int[] posicionPersonaje, int[][] unaMatriz){
-
+        if(unaMatriz[posicionPersonaje[FILA]][posicionPersonaje[COLUMNA]] == 0){
+            puntos = puntos + 3;
+        } else if(unaMatriz[posicionPersonaje[FILA]][posicionPersonaje[COLUMNA]] == 2){
+            puntos = puntos + 6;
+            invesibilidad = invesibilidad + 15;
+        }
         return puntos;
     }
 
     static void mostrarPuntos(){
         System.out.println("PUNTOS " + puntos);
+        System.out.println("INVENSIBILIDAD " + invesibilidad);
     }
 }
