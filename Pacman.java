@@ -50,6 +50,7 @@ public class Pacman {
             mostrarPuntos();
             imprimirMundo(unaMatriz, posicionPersonaje, posicionFantasma);
             verAccion(posicionPersonaje);
+            //teletransportacion(posicionPersonaje, unaMatriz);
             registrarPuntos(posicionPersonaje, unaMatriz);
         } while (!terminar);
     }
@@ -121,6 +122,18 @@ public class Pacman {
         }
         return NADA;
     }
+
+    /*static void teletransportacion(int[] posicionPersonaje, int[][] unaMatriz){
+        if  (unaMatriz[posicionPersonaje[COLUMNA] - 1][posicionPersonaje[FILA]] % 2 == 0) {        
+            posicionPersonaje[COLUMNA] = posicionPersonaje[COLUMNA] - 1;
+        }else if(unaMatriz[posicionPersonaje[COLUMNA] + 1][posicionPersonaje[FILA]] % 2 == 0) {        
+            posicionPersonaje[COLUMNA] = posicionPersonaje[COLUMNA] + 1;
+        }else if(unaMatriz[posicionPersonaje[COLUMNA]][posicionPersonaje[FILA] + 1] % 2 == 0) {        
+            posicionPersonaje[FILA] = posicionPersonaje[FILA] + 1;
+        }else if(unaMatriz[posicionPersonaje[COLUMNA]][posicionPersonaje[FILA] - 1] % 2 == 0) {        
+            posicionPersonaje[FILA] = posicionPersonaje[FILA] - 1;
+        }
+    }*/
 
     static char pedirChar() {
 
