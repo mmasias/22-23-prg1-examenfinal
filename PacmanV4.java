@@ -1,6 +1,6 @@
 import java.util.Scanner;
 
-public class PacmanV2 {
+public class PacmanV4 {
     public static void main(String[] args) {
 
         Scanner entrada = new Scanner(System.in);
@@ -26,6 +26,8 @@ public class PacmanV2 {
         int[] posicionFantasma = { 5, 10 };
         int posicionPastillas;
         int puntosPersonaje = 0;
+        int posicionInvencibilidad;
+        int duracionInvencibilidad = 15;
 
         do {
             for (int laFila = 0; laFila < unaMatriz.length; laFila++) {
@@ -46,21 +48,31 @@ public class PacmanV2 {
                         }
                     }
                 }
-                System.out.print("Puntos: [["+ puntosPersonaje +"]]");
+                System.out.print("Puntos: [["+ puntosPersonaje +"]] / Invencibilidad: [["+duracionInvencibilidad+"]");
                 System.out.println();
             }
 
+                if(posicionPersonaje = posicionPastillas){
+                    unaMatriz[laFila][laColumna] = 2;
+                    System.out.print(" ");
+                    puntosPersonaje = puntosPersonaje +3;
+                }else{
+                    unaMatriz[laFila][laColumna] = 2;
+                    System.out.print(".");
+                }
 
-            if(posicionPersonaje = posicionPastillas){
-                unaMatriz[laFila][laColumna] = 2;
-                System.out.print(" ");
-                puntosPersonaje = puntosPersonaje +3;
-            }else{
-                unaMatriz[laFila][laColumna] = 2;
-                System.out.print(".");
-            }
+                if(posicionPersonaje = posicionInvencibilidad){
+                    
+                    when(posicionPersonaje = posicionPastillas);
+                        unaMatriz[laFila][laColumna] = 2;
+                        System.out.print(" ");
+                        puntosPersonaje = puntosPersonaje+6;
+                    }
 
+                    //como programar que con cada movimiento la duracion se reduzca
 
+                    //programar si se come otra invencibilidad se sume a la que ya tenia
+                    
             inputUsuario = entrada.nextLine().charAt(0);
             switch (inputUsuario) {
                 case 's', 'S', '8':
@@ -79,6 +91,7 @@ public class PacmanV2 {
                     terminar = true;
            
             }
+
         } while (!terminar);
     }
 }

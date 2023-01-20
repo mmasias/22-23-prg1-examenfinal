@@ -57,21 +57,18 @@ public class PacmanV5 {
                     unaMatriz[laFila][laColumna] = 2;
                     System.out.print(" ");
                     puntosPersonaje = puntosPersonaje +3;
-                    System.out.print("Puntos: [["+ puntosPersonaje +"]]");
                 }else{
                     unaMatriz[laFila][laColumna] = 2;
                     System.out.print(".");
                 }
 
                 if(posicionPersonaje = posicionInvencibilidad){
-                    if()
+                    
                     when(posicionPersonaje = posicionPastillas);
                         unaMatriz[laFila][laColumna] = 2;
                         System.out.print(" ");
                         puntosPersonaje = puntosPersonaje+6;
                     }
-
-                    System.out.print("Invencibilidad: [["+duracionInvencibilidad+"]]");
 
                     //como programar que con cada movimiento la duracion se reduzca
 
