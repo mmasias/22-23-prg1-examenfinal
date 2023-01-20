@@ -8,18 +8,19 @@ public class ExamenFinal {
         Scanner entrada = new Scanner(System.in);
         char inputUsuario;
         boolean terminar = false;
+        int puntos =0;
 
         int[][] unaMatriz = {
                 { 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 },
                 { 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1 },
-                { 1, 0, 1, 0, 1, 0, 0, 0, 1, 1, 1, 1, 1, 0, 0, 0, 0, 1, 0, 1, 0, 1 },
+                { 1, 2, 1, 0, 1, 0, 0, 0, 1, 1, 1, 1, 1, 0, 0, 0, 0, 1, 0, 1, 2, 1 },
                 { 1, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 1 },
                 { 1, 0, 1, 1, 1, 1, 0, 1, 1, 1, 0, 1, 1, 1, 1, 0, 1, 1, 1, 1, 0, 1 },
                 { 0, 0, 0, 0, 0, 1, 0, 1, 0, 0, 0, 0, 0, 1, 0, 0, 1, 0, 0, 0, 0, 0 },
                 { 1, 0, 0, 0, 0, 1, 0, 1, 1, 1, 1, 1, 1, 1, 0, 0, 1, 0, 0, 0, 0, 1 },
                 { 1, 0, 1, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 1, 0, 1 },
                 { 1, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 1 },
-                { 1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 1 },
+                { 1, 2, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 2, 1 },
                 { 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1 },
                 { 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 }
         };
@@ -30,24 +31,30 @@ public class ExamenFinal {
         do {
             for (int laFila = 0; laFila < unaMatriz.length; laFila++) {
                 for (int laColumna = 0; laColumna < unaMatriz[laFila].length; laColumna++) {
+                    
                     if (laFila == posicionPersonaje[0] && laColumna == posicionPersonaje[1]) {
                         System.out.print("P");
-                    } else if (laFila == posicionFantasma[0] && laColumna == posicionFantasma[1]) {            //esto para generar el mapa
+                    } else if (laFila == posicionFantasma[0] && laColumna == posicionFantasma[1]) {            
                         System.out.print("F");
                     } else {
                         if (unaMatriz[laFila][laColumna] == 0) {
                             System.out.print(".");
                         } else if (unaMatriz[laFila][laColumna] == 1) {
                             System.out.print("#");
-                        }
+                        }else if (unaMatriz[laFila][laColumna]==2){
+                            System.out.print("x");
+
+                        }     
                     }
+
+                    
                 }
                 System.out.println();
             }
-            if(){
-            
-
-            }
+         if(posicionPersonaje==unaMatriz[0]) {
+            puntos= puntos +3;
+            System.out.println(puntos);
+         }  
 
             inputUsuario = entrada.nextLine().charAt(0);
             switch (inputUsuario) {
@@ -55,7 +62,7 @@ public class ExamenFinal {
                     posicionPersonaje[0] = posicionPersonaje[0] + 1;
                     break;
                 case 'w', 'W', '2':
-                    posicionPersonaje[0] = posicionPersonaje[0] - 1;                    //esto es para el movimiento 
+                    posicionPersonaje[0] = posicionPersonaje[0] - 1;                    
                     break;
                 case 'a', 'A', '4':
                     posicionPersonaje[1] = posicionPersonaje[1] - 1;
