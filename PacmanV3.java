@@ -18,7 +18,7 @@ public class PacmanV3 {
                 { 1, 0, 1, 1, 1, 1, 0, 1, 1, 1, 0, 1, 1, 1, 1, 0, 1, 1, 1, 1, 0, 1 },
                 { 0, 0, 0, 0, 0, 1, 0, 1, 0, 0, 0, 0, 0, 1, 0, 0, 1, 0, 0, 0, 0, 0 },
                 { 1, 0, 0, 0, 0, 1, 0, 1, 1, 1, 1, 1, 1, 1, 0, 0, 1, 0, 0, 0, 0, 1 },
-                { 1, 0, 1, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 1, 0, 1 },
+                { 1, 0, 1, 0, 0, 1, 0, 0, 0, 0, 4, 0, 0, 0, 0, 0, 1, 0, 0, 1, 0, 1 },
                 { 1, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 1 },
                 { 1, 3, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 3, 1 },
                 { 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1 },
@@ -29,20 +29,15 @@ public class PacmanV3 {
         int[] posicionFantasma = { 5, 10 };
 
         do {
-            System.out.println("Puntos:["+contadorPuntos+"]/Invencibilidad:["+ contadorInvencibilidad +"]");
             for (int laFila = 0; laFila < unaMatriz.length; laFila++) {
                 for (int laColumna = 0; laColumna < unaMatriz[laFila].length; laColumna++) {
                     if(laFila == posicionPersonaje[0] && laColumna == posicionPersonaje[1] && unaMatriz[laFila][laColumna] == 0){
+                        unaMatriz[laFila][laColumna] = 2;
                         contadorPuntos=contadorPuntos+3;
-                        unaMatriz[laFila][laColumna] = 2;
-                    }
-                    if(laFila == posicionPersonaje[0] && laColumna == posicionPersonaje[1] && unaMatriz[laFila][laColumna] == 3){
-                        contadorInvencibilidad=contadorInvencibilidad+15;
-                        unaMatriz[laFila][laColumna] = 2;
                     }
                     if (laFila == posicionPersonaje[0] && laColumna == posicionPersonaje[1]) {
                         System.out.print("_P_");
-                    }else if (laFila == posicionFantasma[0] && laColumna == posicionFantasma[1]) {
+                    } else if (laFila == posicionFantasma[0] && laColumna == posicionFantasma[1]) {
                         System.out.print("_F_");
                     }else {
                         if (unaMatriz[laFila][laColumna] == 0) {
@@ -50,20 +45,20 @@ public class PacmanV3 {
                         } else if (unaMatriz[laFila][laColumna] == 1) {
                             System.out.print(" # ");
                         } else if (unaMatriz[laFila][laColumna]== 2){
-                            System.out.print("   ");                            
+                            System.out.print("   ");
                         }else if (unaMatriz[laFila][laColumna]== 3){
                             System.out.print(" X ");                            
-                        }
-                        if(contadorInvencibilidad>0){
-                            contadorInvencibilidad--;
+                        }else if (unaMatriz[laFila][laColumna]== 4){
+                            System.out.print("   ");
                         }
                     }
-
-
+                    if(contadorInvencibilidad>0){
+                        contadorInvencibilidad--;
+                    }
                 }
                 System.out.println();
             }
-
+            System.out.println("Puntos:["+contadorPuntos+"]/Invencibilidad:["+ contadorInvencibilidad +"]");
             inputUsuario = entrada.nextLine().charAt(0);
             switch (inputUsuario) {
                 case 's', 'S', '2':

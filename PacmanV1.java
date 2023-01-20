@@ -33,7 +33,6 @@ public class PacmanV1 {
                     }
                     if (laFila == posicionPersonaje[0] && laColumna == posicionPersonaje[1]) {
                         System.out.print("_P_");
-                        unaMatriz[laFila][laColumna] = 2;
                     } else if (laFila == posicionFantasma[0] && laColumna == posicionFantasma[1]) {
                         System.out.print("_F_");
                     }else {
