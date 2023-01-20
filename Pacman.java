@@ -9,6 +9,8 @@ public class Pacman {
     static final int ABAJO = 2;
     static final int IZQUIERDA = 3;
     static final int DERECHA = 4;
+    static final int SKIN = 0;
+
 
     static final int[][] MOVIMIENTOS = {
             {0, 0},
@@ -65,6 +67,8 @@ public class Pacman {
                 mueve(elPersonaje, DERECHA, elMapa);
                 break;
         }
+
+
     }
 
 
@@ -79,6 +83,8 @@ public class Pacman {
                 return IZQUIERDA;
             case 'd', 'D', '6':
                 return DERECHA;
+            case 'v','V':
+                return SKIN;
         }
         return 0;
     }
@@ -102,7 +108,7 @@ public class Pacman {
             System.out.println();
 
         }
-        System.out.println("Puntuacion: " + puntos);
+        System.out.println("Puntuacion: " + puntos+" //Skin: ");
     }
 
     static void imprimeTerreno(int unTile) {
@@ -133,6 +139,18 @@ public class Pacman {
 
         elPersonaje[FILA] = nuevaFila;
         elPersonaje[COLUMNA] = nuevaColumna;
+        if (elPersonaje[FILA] == 12) {
+            elPersonaje[FILA]=0;
+        }
+        if (elPersonaje[COLUMNA] == 21) {
+            elPersonaje[COLUMNA] =0;
+        }
+        if (elPersonaje[FILA] == 0) {
+            elPersonaje[FILA]=12;
+        }
+        if (elPersonaje[COLUMNA] == 0) {
+            elPersonaje[COLUMNA] =21;
+        }
     }
 
 
@@ -181,22 +199,22 @@ public class Pacman {
         return false;
 
     }
+//No consingo implementar en nivel 3. Pero ya esta implementado el 4.
+  //  static int invencibilidad(int[] elPersonaje, int[][] elMapa, int[][] fantasma) {
+      //  int turno = 16;
+        //do {
+          //  for (int i = 0; i < elMapa.length; i++) {
+             //   for (int j = 0; j < elMapa.length; j++) {
+               //     if (elMapa[elPersonaje[FILA]][elPersonaje[COLUMNA]] == 3) {
+                        //elMapa[elPersonaje[FILA]][elPersonaje[COLUMNA]] = 2;
 
-    static int invencibilidad(int[] elPersonaje, int[][] elMapa, int[][] fantasma) {
-        int turno = 16;
-        do {
-            for (int i = 0; i < elMapa.length; i++) {
-                for (int j = 0; j < elMapa.length; j++) {
-                    if (elMapa[elPersonaje[FILA]][elPersonaje[COLUMNA]] == 3) {
-                        elMapa[elPersonaje[FILA]][elPersonaje[COLUMNA]] = 2;
+               //     }
+              //  }
+              //  if (elPersonaje[FILA]  fantasma) {
 
-                    }
-                }
-                if (elPersonaje[FILA]  fantasma) {
-                    
-                }
-            }
-        } while (turno == 0);
-        return 0;
-    }
+               // }
+           // }
+        //} while (turno == 0);
+      //  return 0;
+    //}
 }
