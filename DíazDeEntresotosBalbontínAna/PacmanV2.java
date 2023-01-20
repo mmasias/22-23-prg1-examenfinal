@@ -50,12 +50,11 @@ public class PacmanV2 {
                 System.out.println();
             }
 
-            
+
             if(posicionPersonaje = posicionPastillas){
                 unaMatriz[laFila][laColumna] = 2;
                 System.out.print(" ");
                 puntosPersonaje = puntosPersonaje +3;
-                System.out.println("Puntos: [["+ puntosPersonaje +"]]");
             }else{
                 unaMatriz[laFila][laColumna] = 2;
                 System.out.print(".");

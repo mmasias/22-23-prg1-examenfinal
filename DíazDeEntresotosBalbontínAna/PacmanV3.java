@@ -63,14 +63,12 @@ public class PacmanV3 {
                 }
 
                 if(posicionPersonaje = posicionInvencibilidad){
-                    if()
+                
                     when(posicionPersonaje = posicionPastillas);
                         unaMatriz[laFila][laColumna] = 2;
                         System.out.print(" ");
                         puntosPersonaje = puntosPersonaje+6;
                     }
-
-                    System.out.print("Invencibilidad: [["+duracionInvencibilidad+"]]");
 
                     //como programar que con cada movimiento la duracion se reduzca
 
