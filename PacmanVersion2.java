@@ -1,5 +1,4 @@
-
-    import java.util.Scanner;
+import java.util.Scanner;
 public class examenfinal {
     public static void main(String[] args) {
 
@@ -72,7 +71,15 @@ public class examenfinal {
                 case 'f', 'F':
                     terminar = true;
             }
-        } while (!terminar);
+            for (int laFila = 0; laFila < unaMatriz.length; laFila++) {
+                for (int laColumna = 0; laColumna < unaMatriz[laFila].length; laColumna++) {
+                    if (laFila == posicionPersonaje[0] && laColumna == posicionPersonaje[1] && unaMatriz[laFila][laColumna] == 0) {
+                        unaMatriz [laFila][laColumna] = -1;
+                        contadorpastilla = contadorpastilla + 3;
+                    }
+       } } while (!terminar);
+    }
+
     }
 }
 
