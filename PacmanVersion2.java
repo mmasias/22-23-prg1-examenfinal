@@ -12,7 +12,7 @@ public class Pacman{
         int[][] unaMatriz = {
                 { 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 },
                 { 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1 },
-                { 1, 2, 1, 0, 1, 0, 0, 0, 1, 1, 1, 1, 1, 0, 0, 0, 0, 1, 0, 1, 2, 1 },
+                { 1, 0, 1, 0, 1, 0, 0, 0, 1, 1, 1, 1, 1, 0, 0, 0, 0, 1, 0, 1, 0, 1 },
                 { 1, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 1 },
                 { 1, 0, 1, 1, 1, 1, 0, 1, 1, 1, 0, 1, 1, 1, 1, 0, 1, 1, 1, 1, 0, 1 },
                 { 0, 0, 0, 0, 0, 1, 0, 1, 0, 0, 0, 0, 0, 1, 0, 0, 1, 0, 0, 0, 0, 0 },
@@ -88,11 +88,7 @@ public class Pacman{
                         unaMatriz [laFila][laColumna] = -1;
                         puntos = puntos + 3;
                     }
-                    if (laFila == posicionPersonaje[0] && laColumna == posicionPersonaje[1] && unaMatriz[laFila][laColumna] == 2) {
-                        unaMatriz [laFila][laColumna] = -1;
-                        puntos = puntos + 6;
-                        invencibilidad = invencibilidad + 15;
-                    }
+    
                 }
             }
         } while (!terminar);
