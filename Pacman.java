@@ -8,8 +8,8 @@ public class Pacman {
 
         int[][] elMapa = {
                 { 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 },
-                { 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1 },
-                { 1, 0, 1, 3, 1, 0, 0, 0, 1, 1, 1, 1, 1, 0, 0, 0, 0, 1, 3, 1, 0, 1 },
+                { 1, 3, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 3, 1 },
+                { 1, 0, 1, 0, 1, 0, 0, 0, 1, 1, 1, 1, 1, 0, 0, 0, 0, 1, 0, 1, 0, 1 },
                 { 1, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 1 },
                 { 1, 0, 1, 1, 1, 1, 0, 1, 1, 1, 0, 1, 1, 1, 1, 0, 1, 1, 1, 1, 0, 1 },
                 { 0, 0, 0, 0, 0, 1, 0, 1, 0, 0, 0, 0, 0, 1, 0, 0, 1, 0, 0, 0, 0, 0 },
@@ -17,7 +17,7 @@ public class Pacman {
                 { 1, 0, 1, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 1, 0, 1 },
                 { 1, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 1 },
                 { 1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 1 },
-                { 1, 0, 3, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 3, 0, 0, 1 },
+                { 1, 3, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 3, 1 },
                 { 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 }
         };
 
@@ -129,8 +129,7 @@ public class Pacman {
                         }
                         break;
                 }
-                registraPuntos(pacman, elMapa);
-                
+                registraPuntos(pacman, elMapa);     
 	}
 
     private static void registraPuntos(int[] pacman, int[][] elMapa){
@@ -140,7 +139,6 @@ public class Pacman {
         }else if(elMapa[pacman[1]][pacman[0]] == 3){
             invencibilidad += 15;
             elMapa[pacman[1]][pacman[0]] = 2;
-            puntos += 6;
         }
     }
 
@@ -149,13 +147,13 @@ public class Pacman {
     }
 
     private static void dibujaInvencibilidad() {
-        if (invencibilidad < 15) {
             System.out.println("Te quedan [ "+ invencibilidad +" ] movimientos de invencibilidad");
-        }
-		
     }
 
     private static void imprimeMapa(int[][] mapa, int[] pacman, int[] fantasma1) {
+
+        dibujaPuntos();
+        dibujaInvencibilidad();
 
 		for (int y = 0; y < mapa.length; y++) 
 		{
@@ -174,8 +172,7 @@ public class Pacman {
 			System.out.println();
 		}
 		System.out.println();
-        dibujaPuntos();
-        dibujaInvencibilidad();
+
 		System.out.println("Utilice las teclas WASD y luego presione Enter para moverse por el mapa.");
 
 	}
