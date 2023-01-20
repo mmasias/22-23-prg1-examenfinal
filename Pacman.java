@@ -1,6 +1,5 @@
 import java.util.Scanner;
-
-public class Pacman {
+public class examenfinal {
     public static void main(String[] args) {
 
         Scanner entrada = new Scanner(System.in);
@@ -28,15 +27,24 @@ public class Pacman {
         do {
             for (int laFila = 0; laFila < unaMatriz.length; laFila++) {
                 for (int laColumna = 0; laColumna < unaMatriz[laFila].length; laColumna++) {
+                    if (posicionPersonaje[0] == laFila && posicionPersonaje[1] == laColumna
+                    && unaMatriz[laFila][laColumna] == 0) {
+                unaMatriz[laFila][laColumna] = 2;
+                    }
+
                     if (laFila == posicionPersonaje[0] && laColumna == posicionPersonaje[1]) {
                         System.out.print("P");
                     } else if (laFila == posicionFantasma[0] && laColumna == posicionFantasma[1]) {
                         System.out.print("F");
-                    } else {
+                    
+                    }
+                    else {
                         if (unaMatriz[laFila][laColumna] == 0) {
-                            System.out.print(" ");
+                            System.out.print(".");
                         } else if (unaMatriz[laFila][laColumna] == 1) {
                             System.out.print("#");
+                        }else if (unaMatriz[laFila][laColumna]== 2){
+                            System.out.print(" ");
                         }
                     }
                 }
@@ -63,3 +71,4 @@ public class Pacman {
         } while (!terminar);
     }
 }
+
