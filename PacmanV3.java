@@ -39,7 +39,6 @@ public class PacmanV3 {
         int[] posicionFantasma = { 5, 10 };
 
         do {
-            relojInvencibilidad();
             dibujarEncabezado();
             dibujarJuego(unaMatriz, posicionPersonaje, posicionFantasma);
             moverJugador(posicionPersonaje);
@@ -105,6 +104,7 @@ public class PacmanV3 {
             case 'f', 'F':
                 terminar = true;
         }
+        relojInvencibilidad();
     }
 
     static int[][] modificacionMapa(int[][] mapa, int[] posicionJugador) {
