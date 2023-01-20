@@ -39,22 +39,31 @@ public class ExamenFinal {
                     } else {
                         if (unaMatriz[laFila][laColumna] == 0) {
                             System.out.print(".");
-                        } else if (unaMatriz[laFila][laColumna] == 1) {
+
+                        }else if (unaMatriz[laFila][laColumna] == 1) {
                             System.out.print("#");
                         }else if (unaMatriz[laFila][laColumna]==2){
                             System.out.print("x");
-
-                        }     
+                        }
+                    
+                    
+                    }if (unaMatriz[2]==posicionPersonaje){
+                        unaMatriz[laColumna][laFila]=-1;
+                        puntos= puntos +3;
+                        System.out.println(puntos);
                     }
+                    if(posicionPersonaje==unaMatriz[0] && unaMatriz[laColumna][laFila]==2){
+                        puntos = puntos +6;
+                        System.out.println(puntos);   
+                    }
+                    
 
                     
                 }
                 System.out.println();
             }
-         if(posicionPersonaje==unaMatriz[0]) {
-            puntos= puntos +3;
-            System.out.println(puntos);
-         }  
+         
+            
 
             inputUsuario = entrada.nextLine().charAt(0);
             switch (inputUsuario) {
@@ -73,7 +82,7 @@ public class ExamenFinal {
                 case 'f', 'F':
                     terminar = true;
             }
-        } while (!terminar);
+        } while (!terminar || posicionPersonaje==posicionFantasma);
     }
 
     
