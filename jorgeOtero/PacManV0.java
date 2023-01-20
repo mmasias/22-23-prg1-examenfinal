@@ -88,7 +88,14 @@ public class PacManV0 {
         for (int laFila = 0; laFila < unMapa.length; laFila++) {
             for (int laColumna = 0; laColumna < unMapa[laFila].length; laColumna++) {
                 if (laFila == unPersonaje[FILA] && laColumna == unPersonaje[COLUMNA]) {
-                    System.out.print("P");
+                    if (version==1){
+                        imprimePersonajeVersion1();
+                    } else if (version==2){
+                        imprimePersonajeVersion3();
+                    }else if (version==3){
+                        imprimePersonajeVersion3();
+                    }
+                  
                 } else if(unPersonaje[FILA]>filaMax){
                     unPersonaje[FILA] = filaMin;
                 } else if(unPersonaje[FILA]<filaMin){
@@ -100,12 +107,30 @@ public class PacManV0 {
                 } else if (laFila == unVillano[FILA] && laColumna == unVillano[COLUMNA]) {
                     System.out.print("F");
                 } else {
-                    imprimeTerrenoVersion3(unMapa[laFila][laColumna]);
+                    if (version==1){
+                        imprimeTerrenoVersion1(unMapa[laFila][laColumna]);
+                    } else if (version==2){
+                        imprimeTerrenoVersion2(unMapa[laFila][laColumna]);
+                    }else if (version==3){
+                        imprimeTerrenoVersion3(unMapa[laFila][laColumna]);
+                    }
                 }
             }
             comePastillas(unMapa, unPersonaje);
             System.out.println();
         }
+    }
+    static void imprimePersonajeVersion1(){
+        System.out.print("P");
+
+    }
+    static void imprimePersonajeVersion2(){
+        System.out.print("PP");
+
+    }
+    static void imprimePersonajeVersion3(){
+        System.out.print("PPP");
+
     }
 
     static void movimiento(int [] unPersonaje){
@@ -129,8 +154,12 @@ public class PacManV0 {
                 terminar = true;
             case 'v', 'V':
                 if(version ==1){
-                    version =2;
-                } else if(version=0)
+                    version = 2;
+                } else if(version==2){
+                    version = 3;
+                } else if(version == 3){
+                    version =1;
+                }
 
         }
     }
