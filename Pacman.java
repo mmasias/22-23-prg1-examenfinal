@@ -2,14 +2,14 @@ import java.util.Scanner;
 
 public class Pacman {
     
-    private static int puntos = 0;
+    private static int puntos = 0, invencibilidad = 0;
 
     public static void main(String[] args) {
 
         int[][] elMapa = {
                 { 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 },
                 { 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1 },
-                { 1, 0, 1, 0, 1, 0, 0, 0, 1, 1, 1, 1, 1, 0, 0, 0, 0, 1, 0, 1, 0, 1 },
+                { 1, 0, 1, 3, 1, 0, 0, 0, 1, 1, 1, 1, 1, 0, 0, 0, 0, 1, 3, 1, 0, 1 },
                 { 1, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 1 },
                 { 1, 0, 1, 1, 1, 1, 0, 1, 1, 1, 0, 1, 1, 1, 1, 0, 1, 1, 1, 1, 0, 1 },
                 { 0, 0, 0, 0, 0, 1, 0, 1, 0, 0, 0, 0, 0, 1, 0, 0, 1, 0, 0, 0, 0, 0 },
@@ -17,7 +17,7 @@ public class Pacman {
                 { 1, 0, 1, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 1, 0, 1 },
                 { 1, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 1 },
                 { 1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 1 },
-                { 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1 },
+                { 1, 0, 3, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 3, 0, 0, 1 },
                 { 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 }
         };
 
@@ -102,50 +102,46 @@ public class Pacman {
 		switch (unaDireccion) {
                     case "ABAJO":
                         pacman[1] = pacman[1] + 1;
-
-                        if(elMapa[pacman[1]][pacman[0]] == 0)
-                        {
-                            elMapa[pacman[1]][pacman[0]] = 2;
-                            puntos += 3;
-                        }
                         break;
                     case "ARRIBA":
                         pacman[1] = pacman[1] - 1;
-                        
-                        if(elMapa[pacman[1]][pacman[0]] == 0)
-                        {
-                            elMapa[pacman[1]][pacman[0]] = 2;
-                            puntos += 3;
-                        }
-
                         break;
                     case "IZQUIERDA":
                         pacman[0] = pacman[0] - 1;
-                        
-                        if(elMapa[pacman[1]][pacman[0]] == 0)
-                        {
-                            elMapa[pacman[1]][pacman[0]] = 2;
-                            puntos += 3;
-                        }
-
                         break;
                     case "DERECHA":
                         pacman[0] = pacman[0] + 1;
-                        
-                        if(elMapa[pacman[1]][pacman[0]] == 0)
-                        {
-                            elMapa[pacman[1]][pacman[0]] = 2;
-                            puntos += 3;
-                        }
-
                         break;
                 }
-
+                registraPuntos(pacman, elMapa);
+              
                 
 	}
 
+    private static void registraPuntos(int[] pacman, int[][] elMapa){
+        if(elMapa[pacman[1]][pacman[0]] == 0){
+            elMapa[pacman[1]][pacman[0]] = 2;
+            puntos += 3;
+        }else if(elMapa[pacman[1]][pacman[0]] == 3){
+            invencibilidad += 15;
+            for(int i = 0; i <= invencibilidad; i-- ){
+                invencibilidad --;
+            }
+            elMapa[pacman[1]][pacman[0]] = 2;
+            puntos += 6;
+        }
+    }
+
+
     private static void dibujaPuntos() {
 		System.out.println("Tienes [ "+ puntos +" ] puntos");
+    }
+
+    private static void dibujaInvencibilidad() {
+        if (invencibilidad < 15) {
+            System.out.println("Te quedan [ "+ invencibilidad +" ] movimientos de invencibilidad");
+        }
+		
     }
 
     private static void imprimeMapa(int[][] mapa, int[] pacman, int[] fantasma1) {
@@ -168,6 +164,7 @@ public class Pacman {
 		}
 		System.out.println();
         dibujaPuntos();
+        dibujaInvencibilidad();
 		System.out.println("Utilice las teclas WASD y luego presione Enter para moverse por el mapa.");
 
 	}
@@ -178,6 +175,7 @@ public class Pacman {
 				 " . " ,
 				 "[ ]" ,
                  "   " ,
+                 " O "
 		};
 		System.out.print(terreno[elementos]);
 	}
