@@ -1,3 +1,5 @@
+//Pablo Arce de Aldecoa 20/01/2023
+// Lo unico añadido al reto propuesto, es que al interactuar con el fantasma sin invincibilidad se acaba el juego, si tienes invencibilidad sumas 20 puntos
 import java.util.*;
 public class Pacman {
     public static void main(String[] args) {
@@ -21,42 +23,79 @@ public class Pacman {
         int[] posPersonaje = { 7, 10 };
         int[] posFantasma = { 5, 10 };
         int[] contadorPuntos = {0};
+        int [] turnosInv = {0};
         boolean invencibilidad = false;
-        int [] skinActual = {1};
+        int [] skinActual = {0}; // hay 0, 1 y 3
         while(terminar == false){
-            skins(skinActual, terreno, posPersonaje, posFantasma, contadorPuntos);
+            menus(contadorPuntos, turnosInv, skinActual);
+            skins(skinActual, terreno, posPersonaje, posFantasma);
+            if (turnosInv[0] > 0){turnosInv[0]--;}
             terminar = moverse(posPersonaje, posFantasma, skinActual);
-            invencibilidad = bolaInvencibilidad(terreno, posPersonaje, contadorPuntos); 
+            mundoToroidal(terreno, posPersonaje);
+            invencibilidad = bolaInvencibilidad(terreno, posPersonaje, contadorPuntos, turnosInv); 
             terminar = interaccionFantasma(posFantasma, posPersonaje, contadorPuntos, invencibilidad);
             comerBolitas(terreno, posPersonaje, contadorPuntos);
         }
     }
 
-    static void skins(int [] skinActual, int [][] terreno, int [] posPersonaje, int [] posFantasma, int [] contadorPuntos){
-        System.out.println("Puntuacion: ["+contadorPuntos[0]+"]");
-        if (skinActual[0] == 1){
-            mostrarTerreno1(terreno, posPersonaje, posFantasma);
-        }
+    static void menus(int [] contadorPuntos, int [] turnosInv, int [] skinActual){
+        System.out.println("= ".repeat(20));
+        System.out.println("= ".repeat(20));
+        System.out.println("Puntuacion: ["+contadorPuntos[0]+"] Inv["+turnosInv[0]+"] Skin["+skinActual[0]+"] (0,1,3)");
     }
 
-    static void mostrarTerreno1(int [][] terreno, int [] posPersonaje, int [] posFantasma){
+    static void skins(int [] skinActual, int [][] terreno, int [] posPersonaje, int [] posFantasma){
+        String fantasma = "F";
+        String personaje = "P";
+        String bolitas = "·";
+        String paredes = "#";
+        String vacio =" ";
+        String bola = "><";
+        if (skinActual[0] == 0){
+            fantasma = "F";
+            personaje = "P";
+            bolitas = "·";
+            paredes = "#";
+            vacio =" ";
+            bola = "X";
+        }
+        if (skinActual[0] == 1){
+            fantasma = "FF";
+            personaje = "PP";
+            bolitas = "()";
+            paredes = "##";
+            vacio ="  ";
+            bola = "><";
+        }
+        if (skinActual[0] == 3){
+            fantasma = "FFF";
+            personaje = "PPP";
+            bolitas = " O ";
+            paredes = "###";
+            vacio ="   ";
+            bola = " X ";
+        }
+        mostrarTerreno(terreno, posPersonaje, posFantasma, fantasma, personaje, bolitas, paredes, vacio, bola);
+    }
+
+    static void mostrarTerreno(int [][] terreno, int [] posPersonaje, int [] posFantasma, String fantasma, String personaje, String bolitas, String paredes, String vacio, String bola){
         for (int laFila = 0; laFila < terreno.length; laFila++) {
             for (int laColumna = 0; laColumna < terreno[laFila].length; laColumna++) {
                 if (laFila == posPersonaje[0] && laColumna == posPersonaje[1]) {
-                    System.out.print("P");
+                    System.out.print(personaje);
                 } else if (laFila == posFantasma[0] && laColumna == posFantasma[1]) {
-                    System.out.print("F");
+                    System.out.print(fantasma);
                 } else {
                     if (terreno[laFila][laColumna] == 0) {
-                        System.out.print("·");
+                        System.out.print(bolitas);
                     } else if (terreno[laFila][laColumna] == 1) {
-                        System.out.print("#");
+                        System.out.print(paredes);
                     }
                     else if (terreno[laFila][laColumna] == 2){
-                        System.out.print(" ");
+                        System.out.print(vacio);
                     }
                     else if (terreno[laFila][laColumna] == 3){
-                        System.out.print("X");
+                        System.out.print(bola);
                     }
                 }
             }
@@ -83,10 +122,13 @@ public class Pacman {
                     break;
                 case '0':
                     skinActual[0] = 0;
+                    break;
                 case '1':
-                skinActual[0] = 1;
+                    skinActual[0] = 1;
+                    break;
                 case '3':
-                skinActual[0] = 3;
+                    skinActual[0] = 3;
+                    break;
                 case 'f', 'F':
                     return true;
 
@@ -101,10 +143,13 @@ public class Pacman {
         }
     }
 
-    static boolean bolaInvencibilidad(int [][] terreno, int [] posPersonaje, int [] contadorPuntos){
+    static boolean bolaInvencibilidad(int [][] terreno, int [] posPersonaje, int [] contadorPuntos, int [] turnosInv){
         if (terreno[posPersonaje[0]][posPersonaje[1]] == 3){
             terreno[posPersonaje[0]][posPersonaje[1]] = 2;
             contadorPuntos[0]+=6;
+            turnosInv[0]+=15;
+        }
+        if (turnosInv[0] > 0){
             return true;
         }
         return false;
@@ -121,5 +166,22 @@ public class Pacman {
             return true;
         }
         return false;
+    }
+
+    static void mundoToroidal(int [][] terreno, int [] posPersonaje){
+        System.out.println("hola");
+        if (posPersonaje[0] == 12){
+            System.out.println("hola");
+            posPersonaje[0] = 0;
+        }
+        else if (posPersonaje[0] == -1){
+            posPersonaje[0] = terreno.length-1;
+        }
+        else if (posPersonaje[1] == terreno[1].length){
+            posPersonaje[1] = 0;
+        }
+        else if (posPersonaje[1] == -1){
+            posPersonaje[1] = terreno[1].length-1;
+        }
     }
 }
