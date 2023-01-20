@@ -47,6 +47,8 @@ public class Pacman {
         System.out.print("F");
     }
 
+
+
     private static boolean comandosPacman(int[][] unaMatrunaMatriz, int[] pacman) { 
         Scanner entrada = new Scanner(System.in);
         String inputUsuario;
@@ -63,8 +65,6 @@ public class Pacman {
             direccion = 'S';
         } else if (inputUsuario.equals("d")) {
             direccion = 'E';
-        } else if (inputUsuario.equals("v")) {
-            skin = 2;
         } else {
             System.out.println("No es una tecla valida");
         }
@@ -150,13 +150,6 @@ public class Pacman {
             puntos(pacman);
     }
 
-    private static void cambiarmundo() { 
-        if (inputUsuario.equals("v")) {
-            skinactual = conjuntoDeElementosDos;
-        } else if {
-            skinactual = conjuntoDeElementosUno;
-        }
-    }
 
     private static void elementos(int elementosDelunaMatrunaMatriza) {
 
@@ -184,13 +177,13 @@ public class Pacman {
                 "()",
                 "##",  // Bordes Skin 3
                 "  ", // Vacio
-                "- -",
+                "--",
                 "  ",
                 "><", // poder
                 "FF", // fantasma
 
         };
-        System.out.print(conjuntoDeElementosDos[elementosDelunaMatrunaMatriza]);
+        System.out.print(conjuntoDeElementosTres[elementosDelunaMatrunaMatriza]);
     }
     private static void puntos(int[] pacman) {
 
