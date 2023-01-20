@@ -6,7 +6,6 @@ public class PacmanV2 {
     static final String DIBUJO_FANTASMA = " F ";
     static final String DIBUJO_PARED = "[ ]";
     static final String DIBUJO_PASTILLA = " . ";
-    static final String DIBUJO_INVENCIBILIDAD = " X ";
     static final String DIBUJO_AIRE = "   ";
 
     static boolean terminar = false;
@@ -14,16 +13,10 @@ public class PacmanV2 {
     static final int PUNTOS_POR_PASTILLA = 3;
     static int puntosTotales = 0;
 
-    static final int ANADIDO_INVENCIBILIDAD = 15;
-    static final int PUNTOS_POR_INVENCIBILIDAD = 6;
-    static int contadorInvencibilidad = 0;
-    static boolean esInvencible = false;
-
     public static void main(String[] args) {
-        // 1:Pared, 2:Vacio, 0:Pastilla, 3:PastillaInvencibilidad
         int[][] unaMatriz = {
                 { 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 },
-                { 1, 3, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 3, 1 },
+                { 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1 },
                 { 1, 0, 1, 0, 1, 0, 0, 0, 1, 1, 1, 1, 1, 0, 0, 0, 0, 1, 0, 1, 0, 1 },
                 { 1, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 1 },
                 { 1, 0, 1, 1, 1, 1, 0, 1, 1, 1, 0, 1, 1, 1, 1, 0, 1, 1, 1, 1, 0, 1 },
@@ -32,14 +25,13 @@ public class PacmanV2 {
                 { 1, 0, 1, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 1, 0, 1 },
                 { 1, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 1 },
                 { 1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 1 },
-                { 1, 3, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 3, 1 },
+                { 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1 },
                 { 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 }
         };
         int[] posicionPersonaje = { 7, 10 };
         int[] posicionFantasma = { 5, 10 };
 
         do {
-            relojInvencibilidad();
             dibujarEncabezado();
             dibujarJuego(unaMatriz, posicionPersonaje, posicionFantasma);
             moverJugador(posicionPersonaje);
@@ -49,7 +41,7 @@ public class PacmanV2 {
 
     static void dibujarEncabezado() {
         System.out.println();
-        System.out.println(" PUNTOS: [" + puntosTotales + "] / INVENCIBILIDAD: [" + contadorInvencibilidad + "]");
+        System.out.println(" PUNTOS: [" + puntosTotales + "]");
         System.out.println();
     }
 
@@ -79,9 +71,6 @@ public class PacmanV2 {
             case 2:
                 System.out.print(DIBUJO_AIRE);
                 break;
-            case 3:
-                System.out.print(DIBUJO_INVENCIBILIDAD);
-                break;
         }
     }
 
@@ -109,38 +98,19 @@ public class PacmanV2 {
 
     static int[][] modificacionMapa(int[][] mapa, int[] posicionJugador) {
         int[][] mapaMod = mapa;
-        if (comePastilla(mapa[posicionJugador[0]][posicionJugador[1]])) {
+        if(comePastilla(mapa, posicionJugador)){
             mapaMod[posicionJugador[0]][posicionJugador[1]] = 2;
         }
         return mapaMod;
     }
 
-    static boolean comePastilla(int casillaActual) {
-        switch (casillaActual) {
-            case 0:
-                puntosTotales += PUNTOS_POR_PASTILLA;
-                return true;
-            case 3:
-                modoInvencible();
-                return true;
-            default:
-                return false;
+    static boolean comePastilla(int[][] mapa, int[] posicionJugador){
+        if(mapa[posicionJugador[0]][posicionJugador[1]]==0){
+            puntosTotales += PUNTOS_POR_PASTILLA;
+            return true;
         }
+        return false;
     }
 
-    static void modoInvencible() {
-        puntosTotales += PUNTOS_POR_INVENCIBILIDAD;
-        esInvencible = true;
-        contadorInvencibilidad += ANADIDO_INVENCIBILIDAD;
-    }
-
-    static void relojInvencibilidad() {
-        if ((contadorInvencibilidad - 1) <= 0) {
-            contadorInvencibilidad = 0;
-            esInvencible = false;
-        } else {
-            contadorInvencibilidad--;
-        }
-    }
 
 }
