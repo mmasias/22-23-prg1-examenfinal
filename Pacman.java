@@ -159,8 +159,6 @@ public class Pacman {
         if (posFantasma[0] == posPersonaje[0] && posFantasma[1] == posPersonaje[1]){
             if (invencibilidad){
                 contadorPuntos[0]+=20;
-                posFantasma [0] = 5; 
-                posFantasma [1] = 10;
             }
         }
     }
