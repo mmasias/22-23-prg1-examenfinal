@@ -25,12 +25,13 @@ public class Pacman {
         int laColumna = 22;
         int puntos = 0;
         int numeroDeMapa = 1;
+        int inv = 0;
 
         int[] posicionPersonaje = { 7, 10 };
         int[] posicionFantasma = { 5, 10 };
 
         do {
-            System.out.println("\nPuntos [" + puntos + "]");
+            System.out.println("\nPuntos: [" + puntos + "] / INV: [" + inv + "] / Skin: [" + numeroDeMapa + "]");
             if (numeroDeMapa == 1) {
                 impresionDelMapa1(unaMatriz, posicionPersonaje, posicionFantasma, laFila, laColumna);
             } else if (numeroDeMapa == 2) {
@@ -40,6 +41,7 @@ public class Pacman {
             }
 
             inputUsuario = entrada.nextLine().charAt(0);
+
             switch (inputUsuario) {
                 case 's', 'S', '8':
                     if (unaMatriz[posicionPersonaje[0]][posicionPersonaje[1]] == 0) {
