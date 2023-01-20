@@ -1,6 +1,6 @@
 import java.util.Scanner;
 
-public class PacmanV2 {
+public class PacmanV3 {
 
     static final String DIBUJO_JUGADOR = " P ";
     static final String DIBUJO_FANTASMA = " F ";
