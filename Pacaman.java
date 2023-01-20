@@ -25,11 +25,12 @@ public class Pacman {
 
         int[] posicionPersonaje = { 7, 10 };
         int[] posicionFantasma = { 5, 10 };
-        int[][] posicionPastillas = {{8,10},
+        int[] posicionPastillas = {{8,10},
                                      {2,10}};
 
 
         do {
+            System.out.println("puntos;" + puntos);
             for (int laFila = 0; laFila < unaMatriz.length; laFila++) {
                 for (int laColumna = 0; laColumna < unaMatriz[laFila].length; laColumna++) {
                     if (laFila == posicionPersonaje[0] && laColumna == posicionPersonaje[1]) {
@@ -41,12 +42,15 @@ public class Pacman {
                             System.out.print(" ");
                         } else if (unaMatriz[laFila][laColumna] == 1) {
                             System.out.print("#");
-                        }
-                          } else if (laFila == posicionPastillase[0] && laColumna == posicionPastillas[1]) {
+                        } else if (unaMatriz[laFila][laColumna] == 2) {
+                            System.out.print("0"); 
+                            puntos = puntos + 3;
+                        } else if (laFila == posicionPastillas[2] && laColumna == posicionPastillas[2]) {
                         System.out.print("#");
                  
                 }
                 System.out.println();
+                        
             }
 
             inputUsuario = entrada.nextLine().charAt(0);
