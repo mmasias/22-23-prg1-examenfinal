@@ -2,140 +2,80 @@ import java.util.Scanner;
 // Se mueve
 public class Pacman {
 
-    static final int FILA = 0;
-	static final int COLUMNA = 1;
+    static final int laFila = 0;
+	static final int laColumna = 1;
+    public static void main(String[] args) {
 
-	static final int ARRIBA = 1;
-	static final int ABAJO = 2;
-	static final int IZQUIERDA = 3;
-	static final int DERECHA = 4;
+        Scanner entrada = new Scanner(System.in);
+        char inputUsuario;
+        boolean terminar = false;
 
-	static final int[][] MOVIMIENTOS = {
-			{ 0, 0 },
-			{ -1, 0 },
-			{ 1, 0 },
-			{ 0, -1 },
-			{ 0, 1 }
-	};
+        int[][] unaMatriz = {
+                { 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 },
+                { 1, 0, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 1 },
+                { 1, 2, 1, 2, 1, 2, 2, 2, 1, 1, 1, 1, 1, 2, 2, 2, 2, 1, 2, 1, 2, 1 },
+                { 1, 2, 1, 2, 2, 2, 2, 2, 2, 2, 2, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 1 },
+                { 1, 0, 1, 1, 1, 1, 0, 1, 1, 1, 0, 1, 1, 1, 1, 0, 1, 1, 1, 1, 0, 1 },
+                { 0, 0, 0, 0, 0, 1, 0, 1, 0, 0, 0, 0, 0, 1, 0, 0, 1, 0, 2, 2, 2, 2 },
+                { 1, 2, 2, 2, 2, 1, 2, 1, 1, 1, 1, 1, 1, 1, 2, 2, 1, 2, 2, 2, 2, 1 },
+                { 1, 2, 1, 2, 2, 1, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 1, 2, 2, 1, 2, 1 },
+                { 1, 2, 1, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 1, 2, 1 },
+                { 1, 2, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 2, 1 },
+                { 1, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1 },
+                { 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 }
+        };
 
-	static final char[] TECLAS = { 'x', 'w', 's', 'a', 'd' };
+        int[] posicionPersonaje = { 7, 10 };
+        int[] posicionFantasma = { 5, 10 };
+        int personajeX = laFila;
+        int personajeY = laColumna;
+        String[] terreno = {
+            " ",
+            "#",
+            "."
+        };
 
-	public static void main(String[] args) {
+        do {
+            for (int laFila = 0; laFila < unaMatriz.length; laFila++) {
+                for (int laColumna = 0; laColumna < unaMatriz[laFila].length; laColumna++) {
+                    if (laFila == posicionPersonaje[0] && laColumna == posicionPersonaje[1]) {
+                        System.out.print("P");
+                        personajeX = laFila;
+                        personajeY = laColumna;
+                    } else if (laFila == posicionFantasma[0] && laColumna == posicionFantasma[1]) {
+                        System.out.print("F");
+                    } else {
+                        if (unaMatriz[laFila][laColumna] == 0) {
+                            System.out.print(terreno[0]);
+                        } else if (unaMatriz[laFila][laColumna] == 1) {
+                            System.out.print(terreno[1]);
+                         } else if (unaMatriz[laFila][laColumna] == 2) {
+                            System.out.print(terreno[2]);
+                        }  else if(personajeX == 2 || personajeY == 2){
+                            System.out.print(terreno[0]);
+                        }
+                    }
+                }
+                System.out.println();
+            }
 
-		int[][] elMapa = { { 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 },
-        { 1, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 0, 0, 0, 0, 0, 0, 0, 1 },
-        { 1, 2, 1, 2, 1, 2, 0, 0, 1, 1, 1, 1, 1, 0, 0, 0, 0, 1, 2, 1, 2, 1 },
-        { 1, 2, 1, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 0, 0, 1, 0, 1 },
-        { 1, 0, 1, 1, 1, 1, 0, 1, 1, 1, 0, 1, 1, 1, 1, 0, 1, 1, 1, 1, 0, 1 },
-        { 0, 0, 0, 0, 0, 1, 0, 1, 0, 0, 2, 2, 2, 1, 2, 2, 1, 2, 2, 2, 2, 2 },
-        { 1, 0, 0, 0, 0, 1, 0, 1, 1, 1, 1, 1, 1, 1, 0, 0, 1, 0, 2, 2, 2, 1 },
-        { 1, 2, 1, 2, 2, 1, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 1, 2, 2, 1, 2, 1 },
-        { 1, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 1 },
-        { 1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 1 },
-        { 1, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 1 },
-        { 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 }
-		};
-
-		int[] elPersonaje = { 1, 3 };
-        int[] elFantasma = { 3, 7 };
-
-		do {
-			imprimeMundo(elMapa, elPersonaje, elFantasma);
-			definePosicion(elPersonaje);
-		} while (true);
-	}
-
-	private static void definePosicion(int[] elPersonaje) {
-
-		switch (capturaMovimiento()) {
-			case ARRIBA:
-				mueve(elPersonaje, ARRIBA);
-				break;
-			case ABAJO:
-				mueve(elPersonaje, ABAJO);
-				break;
-			case IZQUIERDA:
-				mueve(elPersonaje, IZQUIERDA);
-				break;
-			case DERECHA:
-				mueve(elPersonaje, DERECHA);
-				break;
-		}
-	}
-
-	private static int capturaMovimiento() {
-
-		switch (preguntaChar()) {
-			case 's', 'S', '8':
-				return ABAJO;
-			case 'w', 'W', '2':
-				return ARRIBA;
-			case 'a', 'A', '4':
-				return IZQUIERDA;
-			case 'd', 'D', '6':
-				return DERECHA;
-		}
-		return 0;
-	}
-
-	static void imprimeMundo(int[][] unMapa, int[] unPersonaje, int []  unFantasma) {
-
-		for (int fila = 0; fila < unMapa.length; fila++) {
-			for (int columna = 0; columna < unMapa[fila].length; columna++) {
-				if (fila == unPersonaje[FILA] && columna == unPersonaje[COLUMNA]) {
-					imprimePersonaje();
-				} else 
-                if (fila == unFantasma [FILA] && columna == unFantasma [COLUMNA]) {
-                        imprimeFantasma();
-                }else {
-					imprimeTerreno(unMapa[fila][columna]);
-				}
-			}
-			System.out.println();
-		}
-	}
-
-	static void imprimeTerreno(int unTile) {
-
-		String[] terreno = {
-				" ",
-				"#",
-				".",
-		};
-		System.out.print(terreno[unTile]);
-	}
-
-	static void imprimePersonaje() {
-
-		System.out.print("P");
-	}
-
-    static void imprimeFantasma() {
-
-		System.out.print("F");
-	}
-
-	static void mueve(int[] elPersonaje, int movimiento) {
-
-		elPersonaje[FILA] = elPersonaje[FILA] + MOVIMIENTOS[movimiento][FILA];
-		elPersonaje[COLUMNA] = elPersonaje[COLUMNA] + MOVIMIENTOS[movimiento][COLUMNA];
-	}
-
-	static int preguntaInt() {
-
-		Scanner entrada = new Scanner(System.in);
-		return entrada.nextInt();
-	}
-
-	static String preguntaString() {
-
-		Scanner entrada = new Scanner(System.in);
-		return entrada.nextLine();
-	}
-
-	static char preguntaChar() {
-
-		Scanner entrada = new Scanner(System.in);
-		return entrada.next().charAt(0);
-	}
+            inputUsuario = entrada.nextLine().charAt(0);
+            switch (inputUsuario) {
+                case 's', 'S', '8':
+                    posicionPersonaje[0] = posicionPersonaje[0] + 1;
+                    break;
+                case 'w', 'W', '2':
+                    posicionPersonaje[0] = posicionPersonaje[0] - 1;
+                    break;
+                case 'a', 'A', '4':
+                    posicionPersonaje[1] = posicionPersonaje[1] - 1;
+                    break;
+                case 'd', 'D', '6':
+                    posicionPersonaje[1] = posicionPersonaje[1] + 1;
+                    break;
+                case 'f', 'F':
+                    terminar = true;
+            }
+        } while (!terminar);
+    }
 }
