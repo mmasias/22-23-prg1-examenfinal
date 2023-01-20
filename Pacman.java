@@ -5,7 +5,10 @@ public class Pacman {
 
         Scanner entrada = new Scanner(System.in);
         char inputUsuario;
-        boolean terminar = false;
+        boolean ganar = false;
+        int vidas = 3;
+        final int FILA = 0;
+        final int COLUMNA =1;
 
         int[][] unaMatriz = {
                 { 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 },
@@ -60,6 +63,6 @@ public class Pacman {
                 case 'f', 'F':
                     terminar = true;
             }
-        } while (!terminar);
+        } while (vidas!=0 && ganar false);
     }
 }
