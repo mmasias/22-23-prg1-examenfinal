@@ -1,6 +1,6 @@
 import java.util.Scanner;
 
-public class ExamenFinal2 {
+public class Commit2 {
     static int[] elPersonaje = { 7, 10 };
     static int[] elFantasma = { 5, 10 };
     static int FILA = 0;
