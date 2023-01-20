@@ -28,6 +28,9 @@ public class Pacman {
         int pastillaComida = 2;
         int contador = 0; //En esta versión se añaden 3 por cada movimiento del personaje, falta corregirlo para que lo haga al comerse cada pastilla
         int invencibilidad = 0;
+        int skin = 1;
+        int seleccionSkin = 1;
+        int inputSkin = 1;
 
         // Pastillas añadidas, falta incluir que desaparezcan al ser comidas
         do {
@@ -49,6 +52,15 @@ public class Pacman {
                             System.out.print("X");
                         }                       
                     }
+                    //else if (unaMatriz[laFila][laColumna] == 1 && inputSkin == 1) {
+                    //    System.out.print("#");
+                    //}else if (unaMatriz[laFila][laColumna] == 1 && inputSkin == 2) {
+                     //   System.out.print("##");
+                    //}//imprime las pastillas de invencibilidad
+                    // else if (unaMatriz[laFila][laColumna] == 2 && inputSkin == 1) { 
+                    //    System.out.print("X");
+                    //}else if (unaMatriz[laFila][laColumna] == 2 && inputSkin == 2) { 
+                    //    System.out.print("><"); 
                 }
                 System.out.println();
             }
@@ -64,17 +76,20 @@ public class Pacman {
                 case 'a', 'A', '4':
                     posicionPersonaje[1] = posicionPersonaje[1] - 1;
                     break;
+                    case 'v', 'V':
+                    System.out.print("Seleccione skin 1,2 o 3: ");
+                    inputSkin = entrada.nextLine().charAt(0);
+                    break;
                 case 'd', 'D', '6':
                     posicionPersonaje[1] = posicionPersonaje[1] + 1;
                     break;
                 case 'f', 'F':
                     terminar = true;
             }  contador = contador + 3;
-            if(unaMatriz[2][3] == 2){
+            if(unaMatriz[2][3] == 2){ //Condicional para las pastillas de invencibilidad (no funciona bien)
                 invencibilidad = invencibilidad + 15;
                 contador = contador + 6;
             }
 
         } while (!terminar);
     }
-}
