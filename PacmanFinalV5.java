@@ -2,7 +2,7 @@ import java.util.Scanner;
 
 import javax.sound.sampled.SourceDataLine;
 
-public class PacmanFinalV4 {
+public class PacmanFinalV5 {
     public static void main(String[] args) {
 
         Scanner entrada = new Scanner(System.in);
@@ -10,6 +10,8 @@ public class PacmanFinalV4 {
         boolean terminar = false;
         int pastillascomidas = 0;
         int turnosinvencible = 0;
+        int skin = 0;
+        int numeroskins = 2;
 
         int[][] unaMatriz = {
                 { 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 },
@@ -31,7 +33,7 @@ public class PacmanFinalV4 {
 
         do {
                 ImprimeEstado(pastillascomidas, turnosinvencible);
-                ImprimeMapa(unaMatriz, posicionPersonaje, posicionFantasma, turnosinvencible);
+                ImprimeMapa(unaMatriz, posicionPersonaje, posicionFantasma, turnosinvencible, skin);
 
             inputUsuario = entrada.nextLine().charAt(0);
             
@@ -67,9 +69,12 @@ public class PacmanFinalV4 {
                 case 'f', 'F':
                     terminar = true;
                     break;
+                case 'v', 'V':
+                    skin++;
+                    if(skin > numeroskins){
+                        skin = 0;
+                    }
             }
-            System.out.println(posicionPersonaje[0]);
-            System.out.println(posicionPersonaje[1]);
             turnosinvencible= Invencibilidad(unaMatriz, posicionPersonaje, turnosinvencible);
             pastillascomidas= ComerPastillas(unaMatriz, posicionPersonaje, pastillascomidas);
             
@@ -77,31 +82,93 @@ public class PacmanFinalV4 {
         } while (!terminar);
     }
 
-    static void ImprimeMapa(int[][] unaMatriz, int[] posicionPersonaje, int[] posicionFantasma, int turnosinvencible){
+    static void ImprimeMapa(int[][] unaMatriz, int[] posicionPersonaje, int[] posicionFantasma, int turnosinvencible, int skin){
         for (int laFila = 0; laFila < unaMatriz.length; laFila++) {
             for (int laColumna = 0; laColumna < unaMatriz[laFila].length; laColumna++) {
                 if (laFila == posicionPersonaje[0] && laColumna == posicionPersonaje[1]) {
-                    System.out.print("P");
+                    if(skin == 0){
+                        System.out.print("P");
+                    }
+                    else if(skin == 1){
+                        System.out.print("\u001B[33m"+" P "+ "\u001B[37m");
+                    }
+                    else if(skin == 2){
+                        System.out.print(" c");
+                    }
                 } else if (laFila == posicionFantasma[0] && laColumna == posicionFantasma[1]) {
-                    if(turnosinvencible > 0){System.out.print("f");}
-                    else{System.out.print("F");}
+                    if(turnosinvencible > 0){
+                        if(skin == 0){
+                            System.out.print("f");
+                        }
+                        else if(skin == 1){
+                            System.out.print("\u001B[34m"+":"+ "\u001B[37m");
+                        }
+                        else if(skin == 2){
+                            System.out.print(" x");
+                        }
+                }
+                    else{
+                        if(skin== 0){
+                            System.out.print("F");
+                        }
+                        else if(skin == 1){
+                            System.out.print("\u001B[36m"+" Ç "+ "\u001B[37m");
+                        }
+                        else if(skin == 2){
+                            System.out.print(" X");
+                        }
+                    }
                 } else {
-                    ImprimeTile(unaMatriz, laFila, laColumna);
+                    ImprimeTile(unaMatriz, laFila, laColumna, skin);
                 }
             }
             System.out.println();
         }
     }
 
-    static void ImprimeTile(int[][] unaMatriz, int laFila, int laColumna){
+    static void ImprimeTile(int[][] unaMatriz, int laFila, int laColumna, int skin){
         if (unaMatriz[laFila][laColumna] == 0) {
-            System.out.print(" ");
+            if(skin == 0){
+                System.out.print(" ");
+            } 
+            else if(skin == 1){
+                System.out.print("   ");
+            }
+            else if(skin == 2){
+                System.out.print("  ");
+            }
         } else if (unaMatriz[laFila][laColumna] == 1) {
-            System.out.print("#");
+            if(skin == 0){
+                System.out.print("#");
+            }
+            else if(skin == 1){
+                System.out.print("\u001B[34m"+"[#]"+ "\u001B[37m");
+            }
+            else if(skin == 2){
+                System.out.print("[]");
+            }
+            
+
         } else if (unaMatriz[laFila][laColumna] == 2) {
-            System.out.print(".");
+            if(skin == 0){
+                System.out.print(".");
+            }
+            else if(skin == 1){
+                System.out.print("\u001B[31m"+" . "+ "\u001B[37m");
+            }
+            else if(skin == 2){
+                System.out.print(" ,");
+            }
         } else if (unaMatriz[laFila][laColumna] == 3) {
-            System.out.print("o");
+            if(skin == 0){
+                System.out.print("o");
+            }
+            else if(skin == 1){
+                System.out.print("\u001B[31m"+" o "+ "\u001B[37m");
+            }
+            else if(skin == 2){
+                System.out.print("c ");
+            }
         }
     }
 
