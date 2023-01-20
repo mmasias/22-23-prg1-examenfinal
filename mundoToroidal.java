@@ -79,19 +79,19 @@ public class pacman {
             switch (inputUsuario) {
                 case 's', 'S', '8':
                     posicionPersonaje[0] = posicionPersonaje[0] + 1;
-                    invencibilidad = invencibilidad - 1;
+                    if(invencibilidad != 0){invencibilidad = invencibilidad - 1;}
                     break;
                 case 'w', 'W', '2':
                     posicionPersonaje[0] = posicionPersonaje[0] - 1;
-                    invencibilidad = invencibilidad - 1;
+                    if(invencibilidad != 0){invencibilidad = invencibilidad - 1;}
                     break;
                 case 'a', 'A', '4':
                     posicionPersonaje[1] = posicionPersonaje[1] - 1;
-                    invencibilidad = invencibilidad - 1;
+                    if(invencibilidad != 0){invencibilidad = invencibilidad - 1;}
                     break;
                 case 'd', 'D', '6':
                     posicionPersonaje[1] = posicionPersonaje[1] + 1;
-                    invencibilidad = invencibilidad - 1;
+                    if(invencibilidad != 0){invencibilidad = invencibilidad - 1;}
                     break;
                 case 'f', 'F':
                     terminar = true;
@@ -127,3 +127,4 @@ public class pacman {
         } while (!terminar);
     }
 }
+
