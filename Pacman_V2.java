@@ -1,6 +1,6 @@
 import java.util.Scanner;
 
-public class Pacman_V1 {
+public class Pacman_V2 {
     public static void main(String[] args) {
 
         Scanner entrada = new Scanner(System.in);
@@ -24,14 +24,19 @@ public class Pacman_V1 {
 
         int[] posicionPersonaje = { 7, 10 };
         int[] posicionFantasma = { 5, 10 };
+        int puntos = 0;
 
         do {
+            // Contador de puntos
+            System.out.println("PUNTOS:" + puntos);
             for (int laFila = 0; laFila < unaMatriz.length; laFila++) {
                 for (int laColumna = 0; laColumna < unaMatriz[laFila].length; laColumna++) {
-                    //Comer las pastillas cuando el jugador pasa por encima de ellas
+                    // Comer las pastillas cuando el jugador pasa por encima de ellas
                     if (posicionPersonaje[0] == laFila && posicionPersonaje[1] == laColumna
                             && unaMatriz[laFila][laColumna] == 0) {
                         unaMatriz[laFila][laColumna] = 2;
+                        // Añadir puntos al comer la pastilla
+                        puntos = puntos + 3;
                     }
                     if (laFila == posicionPersonaje[0] && laColumna == posicionPersonaje[1]) {
                         System.out.print("P");
