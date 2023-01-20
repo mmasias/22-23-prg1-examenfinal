@@ -45,22 +45,19 @@ public class ExamenFinal {
                         }else if (unaMatriz[laFila][laColumna]==2){
                             System.out.print("x");
                         }
-                    
-                    
-                    }if (unaMatriz[2]==posicionPersonaje){
-                        unaMatriz[laColumna][laFila]=-1;
+                    }if (unaMatriz[laColumna][laFila]==0 && unaMatriz[0]==posicionPersonaje){ 
+                                             
                         puntos= puntos +3;
-                        System.out.println(puntos);
+                        System.out.println("Puntos = ["+puntos+"]");
                     }
-                    if(posicionPersonaje==unaMatriz[0] && unaMatriz[laColumna][laFila]==2){
+                    if(unaMatriz[laColumna][laFila]==2 && unaMatriz[2]==posicionPersonaje){
                         puntos = puntos +6;
                         System.out.println(puntos);   
                     }
                     
-
-                    
                 }
                 System.out.println();
+                
             }
          
             
