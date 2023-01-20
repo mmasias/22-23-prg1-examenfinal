@@ -68,6 +68,7 @@ class pacman{
 		elPersonaje[0][1] = elPersonajeY;
 
         if(elMapa[elPersonajeY][elPersonajeX]==2){
+			puntos= puntos+3;
 			elMapa[elPersonajeY][elPersonajeX]=0;
 			
         }
@@ -82,6 +83,8 @@ class pacman{
 	
     private static void imprimeMapa(int[][] mapaPorImprimir, int[][]elPersonaje, int[][] losNPCs){
 		limpiaPantalla();
+		System.out.println("");
+		System.out.println("Puntos: " + puntos);
 
 		imprimeBordeHorizontal(mapaPorImprimir[0].length);
 		
@@ -106,6 +109,7 @@ class pacman{
 		}		
 		imprimeBordeHorizontal(mapaPorImprimir[0].length);
 		imprimeStatus(elPersonaje, losNPCs);
+
 
 
 	}
@@ -149,5 +153,7 @@ class pacman{
 		String[] matrizDeElementos = {"   ","[#]"," . "};
 		System.out.print(matrizDeElementos[elementoDelMapa]);
 	}
+
+	static int puntos=0;
 
 }
