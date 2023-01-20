@@ -23,6 +23,7 @@ public class Pacman {
 	static int puntos=0;
 	public static void main(String[] args) {
 
+
 		int[][] unaMatriz = {
             { 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 },
             { 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1 },
@@ -37,17 +38,16 @@ public class Pacman {
             { 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1 },
             { 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 }
     };
-
-
 		int[] elPersonaje = { 7, 10 };
-		int[] elFantasma = { 5, 10};
+		int[] elFantasma = { 5, 10 };
 
 		
 
 		do {
-			imprimeMatriz(unaMatriz, elPersonaje, elFantasma);
+			imprimeMundo(unaMatriz, elPersonaje, elFantasma);
 			definePosicion(elPersonaje,unaMatriz);
-		} while ((true));
+			definePosicionFantasma(elFantasma, unaMatriz);
+		} while (!findejuego(elFantasma, elPersonaje));
 	}
 
 	private static void definePosicion(int[] elPersonaje,int[][]elMapa) {
@@ -68,6 +68,24 @@ public class Pacman {
 		}
 	}
 
+	private static void definePosicionFantasma(int[] elFantasma,int [][] elMapa) {
+	
+		switch (generarmovimiento()) {
+			case ARRIBA:
+				mueveF(elFantasma, ARRIBA, elMapa);
+				break;
+			case ABAJO:
+				mueveF(elFantasma, ABAJO, elMapa);
+				break;
+			case IZQUIERDA:
+				mueveF(elFantasma, IZQUIERDA, elMapa);
+				break;
+			case DERECHA:
+				mueveF(elFantasma, DERECHA, elMapa);
+				break;
+		}
+	}
+
 	private static int capturaMovimiento() {
 
 		switch (preguntaChar()) {
@@ -82,12 +100,29 @@ public class Pacman {
 		}
 		return 0;
 	}
+	
+	static int generarmovimiento() {
+		int m = ((int) (Math.random() * 100)) % 4 + 1;
+		switch (m) {
+			case 1:
+				return ARRIBA;
 
+			case 2:
+				return ABAJO;
 
-	static void imprimeMatriz(int[][] unaMatriz, int[] unPersonaje, int[] elFantasma) {
+			case 3:
+				return IZQUIERDA;
 
-		for (int fila = 0; fila < unaMatriz.length; fila++) {
-			for (int columna = 0; columna < unaMatriz[fila].length; columna++) {
+			case 4:
+				return DERECHA;
+		}
+		return ARRIBA;
+	}
+
+	static void imprimeMundo(int[][] unMapa, int[] unPersonaje, int[] elFantasma) {
+
+		for (int fila = 0; fila < unMapa.length; fila++) {
+			for (int columna = 0; columna < unMapa[fila].length; columna++) {
 				if (fila == unPersonaje[FILA] && columna == unPersonaje[COLUMNA]) {
 					imprimePersonaje();
 				} else if (fila == elFantasma[FILA] && columna == elFantasma[COLUMNA]) {
@@ -95,7 +130,7 @@ public class Pacman {
 				}
 
 				else {
-					imprimeTerreno(unaMatriz[fila][columna]);
+					imprimeTerreno(unMapa[fila][columna]);
 				}
 			}
 			System.out.println();
@@ -103,18 +138,18 @@ public class Pacman {
 		}System.out.println("Puntos:"+puntos);
 	}
 
-	static void imprimeTerreno(int unTile) {
+	static void imprimeTerreno(int unTil) {
 
 		String[] terreno = {
 				" . ",
 				"[#]",
 		};
-		System.out.print(terreno[unTile]);
+		System.out.print(terreno[unTil]);
 	}
 
 	static void imprimePersonaje() {
 
-		System.out.print("_P_");
+		System.out.print("_O_");
 
 	}
 
@@ -135,6 +170,17 @@ public class Pacman {
 			elMapa[elPersonaje[FILA]][elPersonaje[COLUMNA]]=5;
 			elPersonaje[FILA] = x;
 			elPersonaje[COLUMNA] = y;
+		}
+
+	}
+	
+	static void mueveF(int[] elFantasma, int movimiento, int[][] elMapa) {
+		int x = elFantasma[FILA] + MOV[movimiento][FILA];
+		int y = elFantasma[COLUMNA] + MOV[movimiento][COLUMNA];
+
+		if (elMapa[x][y] == 0) {
+			elFantasma[FILA] = x;
+			elFantasma[COLUMNA] = y;
 		}
 
 	}
@@ -159,8 +205,19 @@ public class Pacman {
 
 	static void imprime() {
 
-		System.out.print("_P_");
+		System.out.print("_O_");
 		System.out.print("_F_");
+
+	}
+
+	static boolean findejuego(int[]elFantasma, int[]elPersonaje){
+		if(elPersonaje[FILA]== elFantasma[FILA] && elPersonaje[COLUMNA]==elFantasma[COLUMNA]){
+			System.out.println("Fin del juego");
+			return true;
+
+
+		}
+		return false;
 
 	}
 }
