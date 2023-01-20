@@ -29,6 +29,8 @@ public class Pacman {
         int[] posicionFantasma = { 5, 10 };
         int personajeX = laFila;
         int personajeY = laColumna;
+        int points = 0;
+        int invencibilidad = 0;
         String[] terreno = {
             " ",
             "#",
@@ -36,6 +38,9 @@ public class Pacman {
         };
 
         do {
+            System.out.print("La cantidad de puntos es de: " + points + "/ invencibilidad: " + invencibilidad);
+            System.out.println("     ");
+
             for (int laFila = 0; laFila < unaMatriz.length; laFila++) {
                 for (int laColumna = 0; laColumna < unaMatriz[laFila].length; laColumna++) {
                     if (laFila == posicionPersonaje[0] && laColumna == posicionPersonaje[1]) {
@@ -50,9 +55,10 @@ public class Pacman {
                         } else if (unaMatriz[laFila][laColumna] == 1) {
                             System.out.print(terreno[1]);
                          } else if (unaMatriz[laFila][laColumna] == 2) {
-                            System.out.print(terreno[2]);
+                             System.out.print(terreno[2]);
                         }  else if(personajeX == 2 || personajeY == 2){
-                            System.out.print(terreno[0]);
+                            System.out.print(" ");
+                            points = points + 3;
                         }
                     }
                 }
