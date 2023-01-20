@@ -50,20 +50,20 @@ public class Pacman {
 		} while (!findejuego(elFantasma, elPersonaje));
 	}
 
-	private static void definePosicion(int[] elPersonaje,int[][]elMapa) {
+	private static void definePosicion(int[] elPersonaje,int[][]unaMatriz) {
 
 		switch (capturaMovimiento()) {
 			case ARRIBA:
-				mueve(elPersonaje, ARRIBA, elMapa);
+				mueve(elPersonaje, ARRIBA, unaMatriz);
 				break;
 			case ABAJO:
-				mueve(elPersonaje, ABAJO, elMapa);
+				mueve(elPersonaje, ABAJO, unaMatriz);
 				break;
 			case IZQUIERDA:
-				mueve(elPersonaje, IZQUIERDA, elMapa);
+				mueve(elPersonaje, IZQUIERDA, unaMatriz);
 				break;
 			case DERECHA:
-				mueve(elPersonaje, DERECHA, elMapa);
+				mueve(elPersonaje, DERECHA, unaMatriz);
 				break;
 		}
 	}
