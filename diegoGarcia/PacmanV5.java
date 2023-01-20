@@ -6,6 +6,7 @@ public class PacmanV5 {
         int puntuacion = 0;
         boolean invencibilidad = false;
         int contadorInvencible = 0;
+        int contadorSkin = 1;
 
         int[][] unaMatriz = {
                 { 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 },
@@ -26,8 +27,10 @@ public class PacmanV5 {
         int[] posicionFantasma = { 5, 10 };
 
         do {
+           
 
             imprimirPuntuacion(puntuacion);
+            System.out.println(contadorSkin);
 
             if (contadorInvencible == 0){
                 invencibilidad = false;
@@ -35,11 +38,151 @@ public class PacmanV5 {
                 imprimirInvencibilidad(contadorInvencible);
             }
 
-            imprimeJuego(unaMatriz,posicionPersonaje, posicionFantasma);
+            imprimeJuego(unaMatriz,posicionPersonaje, posicionFantasma, contadorSkin);
 
-            puntuacion = definirPosicion(unaMatriz,posicionPersonaje, posicionFantasma, puntuacion , terminar, invencibilidad, contadorInvencible);
+            switch (preguntaChar()) {
+                case 's', 'S', '2':
+    
+                    if(posicionPersonaje[0]== 11){
+                        posicionPersonaje[0] = 0;
+                    }else{
+                        posicionPersonaje[0] = posicionPersonaje[0] + 1;
+    
+                        if(unaMatriz[posicionPersonaje[0]][posicionPersonaje[1]] == 0){
+                            unaMatriz[posicionPersonaje[0]][posicionPersonaje[1]] = 2;
+                            puntuacion += 3;
+                        }else  if(unaMatriz[posicionPersonaje[0]][posicionPersonaje[1]] == 3){
+                            unaMatriz[posicionPersonaje[0]][posicionPersonaje[1]] = 2;
+                            invencibilidad = true;
+                            contadorInvencible += 15;
+                            puntuacion += 6;
+                        }
+    
+                    }
+    
+    
+                    
+    
+                    if(invencibilidad){
+                        contadorInvencible--;
+                        if(unaMatriz[posicionPersonaje[0]][posicionPersonaje[1]] == unaMatriz[posicionFantasma[0]][posicionFantasma[1]]){
+                            unaMatriz[posicionFantasma[0]][posicionFantasma[1]] = 2;
+                        }
+    
+                    }else{
+                        if(unaMatriz[posicionPersonaje[0]][posicionPersonaje[1]] == unaMatriz[posicionFantasma[0]][posicionFantasma[1]]){
+                            terminar = true;
+                        }
+                    }
+    
+                    break;
+                case 'w', 'W', '8':
+                    if(posicionPersonaje[0]== 0){
+                        posicionPersonaje[0] = 11;
+                    }else{
+                        posicionPersonaje[0] = posicionPersonaje[0] - 1;
+    
+                        if(unaMatriz[posicionPersonaje[0]][posicionPersonaje[1]] == 0){
+                            unaMatriz[posicionPersonaje[0]][posicionPersonaje[1]] = 2;
+                            puntuacion += 3;
+                        }else  if(unaMatriz[posicionPersonaje[0]][posicionPersonaje[1]] == 3){
+                            unaMatriz[posicionPersonaje[0]][posicionPersonaje[1]] = 2;
+                            invencibilidad = true;
+                            contadorInvencible += 15;
+                            puntuacion += 6;
+                        }
+                    
+                    }
+    
+                    if(invencibilidad){
+                        contadorInvencible--;
+                        if(unaMatriz[posicionPersonaje[0]][posicionPersonaje[1]] == unaMatriz[posicionFantasma[0]][posicionFantasma[1]]){
+                            unaMatriz[posicionFantasma[0]][posicionFantasma[1]] = 2;
+                        }
+    
+                    }else{
+                        if(unaMatriz[posicionPersonaje[0]][posicionPersonaje[1]] == unaMatriz[posicionFantasma[0]][posicionFantasma[1]]){
+                            terminar = true;
+                        }
+                    }
+    
+                    break;
+                case 'a', 'A', '4':
+                    if(posicionPersonaje[1] == 0){
+                        posicionPersonaje[1] = 21;
+                    }else{
+                        posicionPersonaje[1] = posicionPersonaje[1] - 1;
+    
+                        if(unaMatriz[posicionPersonaje[0]][posicionPersonaje[1]] == 0){
+                            unaMatriz[posicionPersonaje[0]][posicionPersonaje[1]] = 2;
+                            puntuacion += 3;
+                        }else  if(unaMatriz[posicionPersonaje[0]][posicionPersonaje[1]] == 3){
+                            unaMatriz[posicionPersonaje[0]][posicionPersonaje[1]] = 2;
+                            invencibilidad = true;
+                            contadorInvencible += 15;
+                            puntuacion += 6;
+                        }
+                    
+                    }
+    
+                    if(invencibilidad){
+                        contadorInvencible--;
+                        if(unaMatriz[posicionPersonaje[0]][posicionPersonaje[1]] == unaMatriz[posicionFantasma[0]][posicionFantasma[1]]){
+                            unaMatriz[posicionFantasma[0]][posicionFantasma[1]] = 2;
+                        }
+    
+                    }else{
+                        if(unaMatriz[posicionPersonaje[0]][posicionPersonaje[1]] == unaMatriz[posicionFantasma[0]][posicionFantasma[1]]){
+                            terminar = true;
+                        }
+                    }
+    
+                    break;
+                case 'd', 'D', '6':
+                    if(posicionPersonaje[1] == 21){
+                        posicionPersonaje[1] = 0;
+                    }else{
+                        posicionPersonaje[1] = posicionPersonaje[1] + 1;
+    
+                        if(unaMatriz[posicionPersonaje[0]][posicionPersonaje[1]] == 0){
+                            unaMatriz[posicionPersonaje[0]][posicionPersonaje[1]] = 2;
+                            puntuacion += 3;
+                        }else  if(unaMatriz[posicionPersonaje[0]][posicionPersonaje[1]] == 3){
+                            unaMatriz[posicionPersonaje[0]][posicionPersonaje[1]] = 2;
+                            invencibilidad = true;
+                            contadorInvencible += 15;
+                            puntuacion += 6;
+                        }
+                    
+                    }
+    
+                    if(invencibilidad){
+                        contadorInvencible--;
+                        if(unaMatriz[posicionPersonaje[0]][posicionPersonaje[1]] == unaMatriz[posicionFantasma[0]][posicionFantasma[1]]){
+                            unaMatriz[posicionFantasma[0]][posicionFantasma[1]] = 2;
+                        }
+    
+                    }else{
+                        if(unaMatriz[posicionPersonaje[0]][posicionPersonaje[1]] == unaMatriz[posicionFantasma[0]][posicionFantasma[1]]){
+                            terminar = true;
+                        }
+                    }
+                    break;
+    
+                case 'v','V':
+                    if(contadorSkin == 3){
+                        contadorSkin = 1;
+                    }else{
+                        contadorSkin++;
+                    }
+                    
+                    break;
+                    
+                case 'f', 'F':
+                    terminar = true;
+    
+            }
             
-           
 
             
         } while (!terminar);
@@ -71,25 +214,56 @@ public class PacmanV5 {
     }
 
     static void imprimeFantasma(){
-        System.out.println("F");
+        System.out.print("F");
     }
     static void imprimeFantasma2(){
-        System.out.println("FF");
+        System.out.print("FF");
     }
     static void imprimeFantasma3(){
-        System.out.println("FFF");
+        System.out.print("FFF");
     }
 
-    static void imprimeJuego(int unaMatriz[][], int[] posicionPersonaje, int[] posicionFantasma){
+    static void imprimeJuego(int unaMatriz[][], int[] posicionPersonaje, int[] posicionFantasma, int contadorSkin){
 
         for (int laFila = 0; laFila < unaMatriz.length; laFila++) {
             for (int laColumna = 0; laColumna < unaMatriz[laFila].length; laColumna++) {
                 if (laFila == posicionPersonaje[0] && laColumna == posicionPersonaje[1]) {
-                    imprimeJugador();
+                    switch (contadorSkin) {
+                        case 1:
+                            imprimeJugador();
+                            break;
+                        case 2:
+                            imprimeJugador2();
+                            break;
+                        case 3:
+                            imprimeJugador3();
+                            break;
+                    }
                 } else if (laFila == posicionFantasma[0] && laColumna == posicionFantasma[1]) {
-                    System.out.print("F");
+                    switch (contadorSkin) {
+                        case 1:
+                            imprimeFantasma();
+                            break;
+                        case 2:
+                            imprimeFantasma2();
+                            break;
+                        case 3:
+                            imprimeFantasma3();
+                            break;
+                    }
                 } else {
-                    imprimirTerreno(unaMatriz[laFila][laColumna]);
+                    switch (contadorSkin) {
+                        case 1:
+                            imprimirTerreno(unaMatriz[laFila][laColumna]);
+                            break;
+                        case 2:
+                            imprimirTerreno2(unaMatriz[laFila][laColumna]);
+                            break;
+                        case 3:
+                            imprimirTerreno3(unaMatriz[laFila][laColumna]);
+                            break;
+                    }
+                    
                 }
             }
             System.out.println();
@@ -97,146 +271,9 @@ public class PacmanV5 {
 
     }
 
-    static int definirPosicion(int[][] unaMatriz, int[] posicionPersonaje ,int[] posicionFantasma, int puntuacion, boolean terminar, boolean invencibilidad, int contadorInvencible){
-        switch (preguntaChar()) {
-            case 's', 'S', '2':
-
-                if(posicionPersonaje[0]== 11){
-                    posicionPersonaje[0] = 0;
-                }else{
-                    posicionPersonaje[0] = posicionPersonaje[0] + 1;
-
-                    if(unaMatriz[posicionPersonaje[0]][posicionPersonaje[1]] == 0){
-                        unaMatriz[posicionPersonaje[0]][posicionPersonaje[1]] = 2;
-                        return puntuacion += 3;
-                    }else  if(unaMatriz[posicionPersonaje[0]][posicionPersonaje[1]] == 3){
-                        unaMatriz[posicionPersonaje[0]][posicionPersonaje[1]] = 2;
-                        invencibilidad = true;
-                        contadorInvencible += 15;
-                    return puntuacion += 6;
-                    }
-
-                }
-
-
-                
-
-                if(invencibilidad){
-                    contadorInvencible--;
-                    if(unaMatriz[posicionPersonaje[0]][posicionPersonaje[1]] == unaMatriz[posicionFantasma[0]][posicionFantasma[1]]){
-                        unaMatriz[posicionFantasma[0]][posicionFantasma[1]] = 2;
-                    }
-
-                }else{
-                    if(unaMatriz[posicionPersonaje[0]][posicionPersonaje[1]] == unaMatriz[posicionFantasma[0]][posicionFantasma[1]]){
-                        terminar = true;
-                    }
-                }
-
-                break;
-            case 'w', 'W', '8':
-                if(posicionPersonaje[0]== 0){
-                    posicionPersonaje[0] = 11;
-                }else{
-                    posicionPersonaje[0] = posicionPersonaje[0] - 1;
-
-                    if(unaMatriz[posicionPersonaje[0]][posicionPersonaje[1]] == 0){
-                        unaMatriz[posicionPersonaje[0]][posicionPersonaje[1]] = 2;
-                        return puntuacion += 3;
-                    }else  if(unaMatriz[posicionPersonaje[0]][posicionPersonaje[1]] == 3){
-                        unaMatriz[posicionPersonaje[0]][posicionPersonaje[1]] = 2;
-                        invencibilidad = true;
-                        contadorInvencible += 15;
-                    return puntuacion += 6;
-                    }
-                
-                }
-
-                if(invencibilidad){
-                    contadorInvencible--;
-                    if(unaMatriz[posicionPersonaje[0]][posicionPersonaje[1]] == unaMatriz[posicionFantasma[0]][posicionFantasma[1]]){
-                        unaMatriz[posicionFantasma[0]][posicionFantasma[1]] = 2;
-                    }
-
-                }else{
-                    if(unaMatriz[posicionPersonaje[0]][posicionPersonaje[1]] == unaMatriz[posicionFantasma[0]][posicionFantasma[1]]){
-                        terminar = true;
-                    }
-                }
-
-                break;
-            case 'a', 'A', '4':
-                if(posicionPersonaje[1] == 0){
-                    posicionPersonaje[1] = 21;
-                }else{
-                    posicionPersonaje[1] = posicionPersonaje[1] - 1;
-
-                    if(unaMatriz[posicionPersonaje[0]][posicionPersonaje[1]] == 0){
-                        unaMatriz[posicionPersonaje[0]][posicionPersonaje[1]] = 2;
-                        return puntuacion += 3;
-                    }else  if(unaMatriz[posicionPersonaje[0]][posicionPersonaje[1]] == 3){
-                        unaMatriz[posicionPersonaje[0]][posicionPersonaje[1]] = 2;
-                        invencibilidad = true;
-                        contadorInvencible += 15;
-                    return puntuacion += 6;
-                    }
-                
-                }
-
-                if(invencibilidad){
-                    contadorInvencible--;
-                    if(unaMatriz[posicionPersonaje[0]][posicionPersonaje[1]] == unaMatriz[posicionFantasma[0]][posicionFantasma[1]]){
-                        unaMatriz[posicionFantasma[0]][posicionFantasma[1]] = 2;
-                    }
-
-                }else{
-                    if(unaMatriz[posicionPersonaje[0]][posicionPersonaje[1]] == unaMatriz[posicionFantasma[0]][posicionFantasma[1]]){
-                        terminar = true;
-                    }
-                }
-
-                break;
-            case 'd', 'D', '6':
-                if(posicionPersonaje[1] == 21){
-                    posicionPersonaje[1] = 0;
-                }else{
-                    posicionPersonaje[1] = posicionPersonaje[1] + 1;
-
-                    if(unaMatriz[posicionPersonaje[0]][posicionPersonaje[1]] == 0){
-                        unaMatriz[posicionPersonaje[0]][posicionPersonaje[1]] = 2;
-                        return puntuacion += 3;
-                    }else  if(unaMatriz[posicionPersonaje[0]][posicionPersonaje[1]] == 3){
-                        unaMatriz[posicionPersonaje[0]][posicionPersonaje[1]] = 2;
-                        invencibilidad = true;
-                        contadorInvencible += 15;
-                    return puntuacion += 6;
-                    }
-                
-                }
-
-                if(invencibilidad){
-                    contadorInvencible--;
-                    if(unaMatriz[posicionPersonaje[0]][posicionPersonaje[1]] == unaMatriz[posicionFantasma[0]][posicionFantasma[1]]){
-                        unaMatriz[posicionFantasma[0]][posicionFantasma[1]] = 2;
-                    }
-
-                }else{
-                    if(unaMatriz[posicionPersonaje[0]][posicionPersonaje[1]] == unaMatriz[posicionFantasma[0]][posicionFantasma[1]]){
-                        terminar = true;
-                    }
-                }
-
-
-                break;
-            case 'f', 'F':
-                terminar = true;
-
-        }
-        return puntuacion;
-    }
 
     static void imprimirPuntuacion(int puntuacion){
-        System.out.println("PUNTUACION ["+puntuacion+"]");
+        System.out.print("PUNTUACION ["+puntuacion+"] / ");
 
     }
     static char preguntaChar() {
@@ -248,5 +285,6 @@ public class PacmanV5 {
         System.out.println("Invencibilidad["+contador+"]");
     }
 
+   
 
 }
