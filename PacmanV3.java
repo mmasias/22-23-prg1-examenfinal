@@ -239,21 +239,4 @@ public class PacmanV3 {
             }
         } while (!terminar);
     }
-
-    public static void movimientosJugador(int[] posicionPersonaje, int[][] posicionesFrutas,
-            int[] posicionFantasma, int puntos, int turnosInvencible, boolean invencible) {
-        if ((posicionPersonaje[0] == posicionesFrutas[0][0] && posicionPersonaje[1] == posicionesFrutas[0][1])
-                || (posicionPersonaje[0] == posicionesFrutas[1][0] && posicionPersonaje[1] == posicionesFrutas[1][1])
-                || (posicionPersonaje[0] == posicionesFrutas[2][0] && posicionPersonaje[1] == posicionesFrutas[2][1])
-                || (posicionPersonaje[0] == posicionesFrutas[3][0] && posicionPersonaje[1] == posicionesFrutas[3][1])) {
-            puntos = puntos + 6;
-            invencible = true;
-            turnosInvencible = turnosInvencible + 15;
-        }
-        if (turnosInvencible == 0) {
-            invencible = false;
-        }
-
-    }
-
 }
