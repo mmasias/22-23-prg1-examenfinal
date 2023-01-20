@@ -86,6 +86,7 @@ public class sergioMoreno_examenFinal_reto123 {
                     break;
                 case 'f', 'F':
                     terminar = true;
+                    break;
             }
         } while (!terminar);
 
