@@ -127,7 +127,7 @@ public class PackmanV3 {
         private static boolean registraPuntos(int[] posicionPersonaje, int[][] unaMatriz) {
             if (unaMatriz[posicionPersonaje[1]][posicionPersonaje[0]] == 2) {
                 unaMatriz[posicionPersonaje[1]][posicionPersonaje[0]] = 0;
-                puntos++;
+                puntos =+ 3;
             } else if (unaMatriz[posicionPersonaje[1]][posicionPersonaje[0]] == 4) {
                 unaMatriz[posicionPersonaje[1]][posicionPersonaje[0]] = 0;
                 puntos += 6;
