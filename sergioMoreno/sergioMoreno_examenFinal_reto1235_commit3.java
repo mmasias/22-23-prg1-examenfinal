@@ -32,6 +32,7 @@ public class sergioMoreno_examenFinal_reto1234 {
         do {
             System.out.println("Puntos "+"[" + puntos + "]");
             System.out.println("Invencibilidad "+"[" + invencibilidad + "]");
+            System.out.println("Skin "+"[" + v + "]");
 
             if(invencibilidad>0){
                 invencibilidad--;
