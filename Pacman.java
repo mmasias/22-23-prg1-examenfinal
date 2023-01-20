@@ -21,26 +21,22 @@ public class Pacman {
 
     static int minFila, minColumna, maxFila, maxColumna, puntos = 0;
 
-    static boolean terminar = true;
+    static boolean terminar = false;
 
     public static void main(String[] args) {
 
-        Scanner entrada = new Scanner(System.in);
-        char inputUsuario;
-        boolean terminar = false;
-
         int[][] unaMatriz = {
                 { 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 },
-                { 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1 },
+                { 1, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 1 },
                 { 1, 0, 1, 0, 1, 0, 0, 0, 1, 1, 1, 1, 1, 0, 0, 0, 0, 1, 0, 1, 0, 1 },
                 { 1, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 1 },
                 { 1, 0, 1, 1, 1, 1, 0, 1, 1, 1, 0, 1, 1, 1, 1, 0, 1, 1, 1, 1, 0, 1 },
-                { 2, 0, 0, 0, 0, 1, 0, 1, 0, 0, 0, 0, 0, 1, 0, 0, 1, 0, 0, 0, 0, 2 },
+                { 0, 0, 0, 0, 0, 1, 0, 1, 0, 0, 0, 0, 0, 1, 0, 0, 1, 0, 0, 0, 0, 0 },
                 { 1, 0, 0, 0, 0, 1, 0, 1, 1, 1, 1, 1, 1, 1, 0, 0, 1, 0, 0, 0, 0, 1 },
                 { 1, 0, 1, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 1, 0, 1 },
                 { 1, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 1 },
                 { 1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 1 },
-                { 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1 },
+                { 1, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 1 },
                 { 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 }
         };
 
@@ -48,9 +44,10 @@ public class Pacman {
         int[] posicionFantasma = { 5, 10 };
 
         do {
-            mostrarPuntos();
             imprimirMundo(unaMatriz, posicionPersonaje, posicionFantasma);
             verAccion(posicionPersonaje);
+            registrarPuntos(posicionPersonaje, unaMatriz);
+            mostrarPuntos();
         } while (!terminar);
     }
 
@@ -64,11 +61,11 @@ public class Pacman {
                     System.out.print("F");
                 } else {
                     if (unaMatriz[laFila][laColumna] == 0) {
-                        registraPuntos(posicionPersonaje, unaMatriz);
+                        System.out.print(".");
                     } else if (unaMatriz[laFila][laColumna] == 1) {
                         System.out.print("#");
-                    } else if (unaMatriz[laFila][laColumna] == 2){
-                        System.out.print(" ");
+                    } else if (unaMatriz[laFila][laColumna] == 3) {
+                        System.out.print("O");
                     }
                 }
             }
@@ -76,10 +73,10 @@ public class Pacman {
         }
     }
 
-    static void mover(int[] posicionPersonaje, int direccion) {
+    static void mover(int[] unPersonaje, int direccion) {
 
-        posicionPersonaje[FILA] += MOVIMIENTO[direccion][FILA];
-        posicionPersonaje[COLUMNA] += MOVIMIENTO[direccion][COLUMNA];
+        unPersonaje[FILA] += MOVIMIENTO[direccion][FILA];
+        unPersonaje[COLUMNA] += MOVIMIENTO[direccion][COLUMNA];
     }
 
     static void verAccion(int[] posicionPersonaje) {
@@ -129,22 +126,7 @@ public class Pacman {
         return inputUsuario.charAt(0); // Lo comentamos en clase ;)
     }
 
-    static int registraPuntos(int[] posicionPersonaje, int[][] unaMatriz){
-
-        if(unaMatriz[posicionPersonaje[FILA]][posicionPersonaje[COLUMNA]] == 0){
-            unaMatriz[posicionPersonaje[FILA]][posicionPersonaje[COLUMNA]] = 0;
-            System.out.println(" ");
-            puntos = puntos + 3;
-        }
-        if(unaMatriz[posicionPersonaje[FILA]][posicionPersonaje[COLUMNA]] == 1){
-            unaMatriz[posicionPersonaje[FILA]][posicionPersonaje[COLUMNA]] = 1;
-            System.out.println("#");
-        }
-        else if(unaMatriz[posicionPersonaje[FILA]][posicionPersonaje[COLUMNA]] == 2){
-            unaMatriz[posicionPersonaje[FILA]][posicionPersonaje[COLUMNA]] = 0 ;
-            System.out.println(" ");
-            puntos+=5;
-        }
+    static int registrarPuntos(int[] posicionPersonaje, int[][] unaMatriz){
 
         return puntos;
     }
