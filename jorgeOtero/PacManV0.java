@@ -9,6 +9,11 @@ public class PacManV0 {
     static int puntuacion = 0;
     static int movimientos = 16;
     static boolean primerSuperPoder = false;
+    static int filaMax=11;
+    static int filaMin=0;
+    static int columnaMax=21;
+    static int columnaMin=0;
+    static int version = 1;
     public static void main(String[] args) {
 
 
@@ -44,7 +49,7 @@ public class PacManV0 {
         } while (!terminar);
     }
 
-    static void imprimeTerreno(int unNumeroParaTerreno){
+    static void imprimeTerrenoVersion1(int unNumeroParaTerreno){
 
         String[] terreno = {
             ".",
@@ -55,15 +60,47 @@ public class PacManV0 {
         System.out.print(terreno[unNumeroParaTerreno]);
     }
 
+    static void imprimeTerrenoVersion2(int unNumeroParaTerreno){
+
+        String[] terreno = {
+            "()",
+            "##",
+            "  ",
+            "><",
+        };
+        System.out.print(terreno[unNumeroParaTerreno]);
+    }
+
+    
+    static void imprimeTerrenoVersion3(int unNumeroParaTerreno){
+
+        String[] terreno = {
+            " O ",
+            "###",
+            "   ",
+            " X ",
+        };
+        System.out.print(terreno[unNumeroParaTerreno]);
+    }
+
+
     static void imprimeMundo(int [][]unMapa, int[] unPersonaje, int[] unVillano){
         for (int laFila = 0; laFila < unMapa.length; laFila++) {
             for (int laColumna = 0; laColumna < unMapa[laFila].length; laColumna++) {
                 if (laFila == unPersonaje[FILA] && laColumna == unPersonaje[COLUMNA]) {
                     System.out.print("P");
+                } else if(unPersonaje[FILA]>filaMax){
+                    unPersonaje[FILA] = filaMin;
+                } else if(unPersonaje[FILA]<filaMin){
+                    unPersonaje[FILA] = filaMax;
+                } else if(unPersonaje[COLUMNA]>columnaMax){
+                    unPersonaje[COLUMNA] = columnaMin;
+                } else if(unPersonaje[COLUMNA]<columnaMin){
+                    unPersonaje[COLUMNA] = columnaMax;
                 } else if (laFila == unVillano[FILA] && laColumna == unVillano[COLUMNA]) {
                     System.out.print("F");
                 } else {
-                    imprimeTerreno(unMapa[laFila][laColumna]);
+                    imprimeTerrenoVersion3(unMapa[laFila][laColumna]);
                 }
             }
             comePastillas(unMapa, unPersonaje);
@@ -90,6 +127,11 @@ public class PacManV0 {
                 break;
             case 'f', 'F':
                 terminar = true;
+            case 'v', 'V':
+                if(version ==1){
+                    version =2;
+                } else if(version=0)
+
         }
     }
 
