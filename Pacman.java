@@ -21,20 +21,25 @@ public class Pacman {
                 { 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1 },
                 { 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 }
         };
-        // No realizo ningun cambio aun
+
         int[] posicionPersonaje = { 7, 10 };
         int[] posicionFantasma = { 5, 10 };
+        int[] recorridoPersonaje;
+        int pastillaComida = 2;
+        int contador = 0;
 
+        // Pastillas añadidas, falta incluir que desaparezcan al ser comidas
         do {
             for (int laFila = 0; laFila < unaMatriz.length; laFila++) {
                 for (int laColumna = 0; laColumna < unaMatriz[laFila].length; laColumna++) {
-                    if (laFila == posicionPersonaje[0] && laColumna == posicionPersonaje[1]) {
+                    if (laFila == posicionPersonaje[0] && laColumna == posicionPersonaje[1]) {                                              
                         System.out.print("P");
                     } else if (laFila == posicionFantasma[0] && laColumna == posicionFantasma[1]) {
                         System.out.print("F");
                     } else {
                         if (unaMatriz[laFila][laColumna] == 0) {
-                            System.out.print(" ");
+                            System.out.print(".");
+                            contador = contador + 3;
                         } else if (unaMatriz[laFila][laColumna] == 1) {
                             System.out.print("#");
                         }
