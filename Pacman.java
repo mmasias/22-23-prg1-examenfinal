@@ -102,19 +102,34 @@ public class Pacman {
 		switch (unaDireccion) {
                     case "ABAJO":
                         pacman[1] = pacman[1] + 1;
+                        if (invencibilidad > 0) {
+                            puntos += 3;
+                            invencibilidad --;
+                        }
                         break;
                     case "ARRIBA":
                         pacman[1] = pacman[1] - 1;
+                        if (invencibilidad > 0) {
+                            puntos += 3;
+                            invencibilidad --;
+                        }
                         break;
                     case "IZQUIERDA":
                         pacman[0] = pacman[0] - 1;
+                        if (invencibilidad > 0) {
+                            puntos += 3;
+                            invencibilidad --;
+                        }
                         break;
                     case "DERECHA":
                         pacman[0] = pacman[0] + 1;
+                        if (invencibilidad > 0) {
+                            puntos += 3;
+                            invencibilidad --;
+                        }
                         break;
                 }
                 registraPuntos(pacman, elMapa);
-              
                 
 	}
 
@@ -124,14 +139,10 @@ public class Pacman {
             puntos += 3;
         }else if(elMapa[pacman[1]][pacman[0]] == 3){
             invencibilidad += 15;
-            for(int i = 0; i <= invencibilidad; i-- ){
-                invencibilidad --;
-            }
             elMapa[pacman[1]][pacman[0]] = 2;
             puntos += 6;
         }
     }
-
 
     private static void dibujaPuntos() {
 		System.out.println("Tienes [ "+ puntos +" ] puntos");
