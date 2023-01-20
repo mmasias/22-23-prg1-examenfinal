@@ -1,8 +1,6 @@
 import java.text.BreakIterator;
 import java.util.Scanner;
 
-import javax.swing.plaf.basic.BasicInternalFrameTitlePane.MoveAction;
-
 public class Pacman {
 
 	static final int FILA = 0;
@@ -22,10 +20,10 @@ public class Pacman {
 	};
 
 	static final char[] TECLAS = { 'x', 'w', 's', 'a', 'd' };
-	static int marcador=0;
+	static int puntos=0;
 	public static void main(String[] args) {
 
-        int[][] unaMatriz = {
+		int[][] unaMatriz = {
             { 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 },
             { 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1 },
             { 1, 0, 1, 0, 1, 0, 0, 0, 1, 1, 1, 1, 1, 0, 0, 0, 0, 1, 0, 1, 0, 1 },
@@ -40,20 +38,21 @@ public class Pacman {
             { 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 }
     };
 
+
 		int[] elPersonaje = { 7, 10 };
-		int[] elFantasma = { 5,10 };
+		int[] elFantasma = { 5, 10};
 
 		
 
 		do {
 			imprimeMatriz(unaMatriz, elPersonaje, elFantasma);
-			defPosicion(elPersonaje,unaMatriz);
-		} while
+			definePosicion(elPersonaje,unaMatriz);
+		} while ((true));
 	}
 
-	private static void defPosicion(int[] elPersonaje,int[][]elMapa) {
+	private static void definePosicion(int[] elPersonaje,int[][]elMapa) {
 
-		switch (movimientoPersonaje()) {
+		switch (capturaMovimiento()) {
 			case ARRIBA:
 				mueve(elPersonaje, ARRIBA, elMapa);
 				break;
@@ -69,7 +68,7 @@ public class Pacman {
 		}
 	}
 
-	private static int movimientoPersonaje() {
+	private static int capturaMovimiento() {
 
 		switch (preguntaChar()) {
 			case 's', 'S', '8':
@@ -84,10 +83,11 @@ public class Pacman {
 		return 0;
 	}
 
-	static void imprimeMundo(int[][] unMapa, int[] unPersonaje, int[] elFantasma) {
 
-		for (int fila = 0; fila < unMapa.length; fila++) {
-			for (int columna = 0; columna < unMapa[fila].length; columna++) {
+	static void imprimeMatriz(int[][] unaMatriz, int[] unPersonaje, int[] elFantasma) {
+
+		for (int fila = 0; fila < unaMatriz.length; fila++) {
+			for (int columna = 0; columna < unaMatriz[fila].length; columna++) {
 				if (fila == unPersonaje[FILA] && columna == unPersonaje[COLUMNA]) {
 					imprimePersonaje();
 				} else if (fila == elFantasma[FILA] && columna == elFantasma[COLUMNA]) {
@@ -95,12 +95,12 @@ public class Pacman {
 				}
 
 				else {
-					imprimeTerreno(unMapa[fila][columna]);
+					imprimeTerreno(unaMatriz[fila][columna]);
 				}
 			}
 			System.out.println();
 		
-		}System.out.println("El marcador:"+marcador);
+		}System.out.println("Puntos:"+puntos);
 	}
 
 	static void imprimeTerreno(int unTile) {
@@ -114,7 +114,7 @@ public class Pacman {
 
 	static void imprimePersonaje() {
 
-		System.out.print("_O_");
+		System.out.print("_P_");
 
 	}
 
@@ -127,6 +127,10 @@ public class Pacman {
 	static void mueve(int[] elPersonaje, int movimiento, int[][] elMapa) {
 		int x = elPersonaje[FILA] + MOV[movimiento][FILA];
 		int y = elPersonaje[COLUMNA] + MOV[movimiento][COLUMNA];
+		if(elMapa[x][y]==0){
+			puntos+=3; 
+		}
+
 		if (elMapa[x][y] == 0 || elMapa[x][y] ==5 ) {
 			elMapa[elPersonaje[FILA]][elPersonaje[COLUMNA]]=5;
 			elPersonaje[FILA] = x;
@@ -134,7 +138,7 @@ public class Pacman {
 		}
 
 	}
-	
+
 	static int preguntaInt() {
 
 		Scanner entrada = new Scanner(System.in);
@@ -159,5 +163,4 @@ public class Pacman {
 		System.out.print("_F_");
 
 	}
-
 }
