@@ -91,7 +91,7 @@ public class PacManV0 {
                     if (version==1){
                         imprimePersonajeVersion1();
                     } else if (version==2){
-                        imprimePersonajeVersion3();
+                        imprimePersonajeVersion2();
                     }else if (version==3){
                         imprimePersonajeVersion3();
                     }
@@ -105,7 +105,13 @@ public class PacManV0 {
                 } else if(unPersonaje[COLUMNA]<columnaMin){
                     unPersonaje[COLUMNA] = columnaMax;
                 } else if (laFila == unVillano[FILA] && laColumna == unVillano[COLUMNA]) {
-                    System.out.print("F");
+                    if (version==1){
+                        imprimeFantasmaVersion1();
+                    } else if (version==2){
+                        imprimeFantasmaVersion2();
+                    }else if (version==3){
+                        imprimeFantasmaVersion3();
+                    }
                 } else {
                     if (version==1){
                         imprimeTerrenoVersion1(unMapa[laFila][laColumna]);
@@ -132,6 +138,19 @@ public class PacManV0 {
         System.out.print("PPP");
 
     }
+    static void imprimeFantasmaVersion1(){
+        System.out.print("F");
+
+    }
+    static void imprimeFantasmaVersion2(){
+        System.out.print("FF");
+
+    }
+    static void imprimeFantasmaVersion3(){
+        System.out.print("FFF");
+
+    }
+
 
     static void movimiento(int [] unPersonaje){
 
