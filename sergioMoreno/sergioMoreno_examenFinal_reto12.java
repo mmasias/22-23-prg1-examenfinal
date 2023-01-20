@@ -73,6 +73,7 @@ public class sergioMoreno_examenFinal {
                     break;
                 case 'f', 'F':
                     terminar = true;
+                    break;
             }
         } while (!terminar);
 
