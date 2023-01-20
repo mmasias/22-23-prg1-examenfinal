@@ -12,14 +12,14 @@ public class PackmanV3 {
         int[][] unaMatriz = {
                 { 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 },
                 { 1, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 1 },
-                { 1, 2, 1, 2, 1, 2, 2, 2, 1, 1, 1, 1, 1, 2, 2, 2, 2, 1, 2, 1, 2, 1 },
+                { 1, 3, 1, 2, 1, 2, 2, 2, 1, 1, 1, 1, 1, 2, 2, 2, 2, 1, 2, 1, 3, 1 },
                 { 1, 2, 1, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 1, 2, 1 },
                 { 1, 2, 1, 1, 1, 1, 2, 1, 1, 1, 0, 1, 1, 1, 1, 2, 1, 1, 1, 1, 2, 1 },
                 { 2, 2, 2, 2, 2, 1, 2, 1, 0, 0, 0, 0, 0, 1, 2, 2, 1, 2, 2, 2, 2, 2 },
                 { 1, 2, 2, 2, 2, 1, 2, 1, 1, 1, 1, 1, 1, 1, 2, 2, 1, 2, 2, 2, 2, 1 },
                 { 1, 2, 1, 2, 2, 1, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 1, 2, 2, 1, 2, 1 },
                 { 1, 2, 1, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 1, 2, 1 },
-                { 1, 2, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 2, 1 },
+                { 1, 3, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 3, 1 },
                 { 1, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 1 },
                 { 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 }
         };
@@ -70,7 +70,7 @@ public class PackmanV3 {
 
     private static void imprimeTerreno(int elementosDelMapa){
 
-        String[] terreno = { " ", "#", "." };
+        String[] terreno = { " ", "#", ".", "X" };
         System.out.print(terreno[elementosDelMapa]);
     }
 
@@ -116,7 +116,7 @@ public class PackmanV3 {
 
             private static void imprimeStatus(int[] elPersonaje) {
 
-                System.out.println("El personaje está en X:[" + elPersonaje[0] + "] Y:[" + elPersonaje[1] + "] | Tienes [ " + puntos + " ] puntos | Haz hecho [ " + movimientos + " ] movimientos");
+                System.out.println("El personaje está en X:[" + elPersonaje[0] + "] Y:[" + elPersonaje[1] + "] | Tienes [ " + puntos + " ] puntos | Haz hecho [ " + movimientos + " ] movimientos | Eres invencible por [" + duracionInvincibilidad +"] turnos" );
                 
 
         
@@ -128,7 +128,7 @@ public class PackmanV3 {
             if (unaMatriz[posicionPersonaje[1]][posicionPersonaje[0]] == 2) {
                 unaMatriz[posicionPersonaje[1]][posicionPersonaje[0]] = 0;
                 puntos =+ 3;
-            } else if (unaMatriz[posicionPersonaje[1]][posicionPersonaje[0]] == 4) {
+            } else if (unaMatriz[posicionPersonaje[1]][posicionPersonaje[0]] == 3) {
                 unaMatriz[posicionPersonaje[1]][posicionPersonaje[0]] = 0;
                 puntos += 6;
                 duracionInvincibilidad =+ 15;
@@ -137,7 +137,7 @@ public class PackmanV3 {
             boolean hayPastillas = false;
             for (int y = 0; y < unaMatriz.length; y++) {
                 for (int x = 0; x < unaMatriz[y].length; x++) {
-                    if (unaMatriz[y][x] == 2 || unaMatriz[y][x] == 4) {
+                    if (unaMatriz[y][x] == 2 || unaMatriz[y][x] == 3) {
                         hayPastillas = true;
                     }
                 }
