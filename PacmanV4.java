@@ -1,6 +1,6 @@
 import java.util.Scanner;
 
-public class PacmanV3 {
+public class PacmanV4 {
     public static void main(String[] args) {
 
         Scanner entrada = new Scanner(System.in);
@@ -34,14 +34,26 @@ public class PacmanV3 {
             }
             for (int laFila = 0; laFila < unaMatriz.length; laFila++) {
                 for (int laColumna = 0; laColumna < unaMatriz[laFila].length; laColumna++) {
-                    if(laFila == posicionPersonaje[0] && laColumna == posicionPersonaje[1] && unaMatriz[laFila][laColumna] == 3){
-                        unaMatriz[laFila][laColumna] = 2;
-                        contadorInvencibilidad=contadorInvencibilidad+15;
-                        contadorPuntos=contadorPuntos+6;
+                    if(laFila == posicionPersonaje[0] && laColumna == posicionPersonaje[1] && laFila==0){
+                        posicionPersonaje[0]=10;
+                    }
+                    if(laFila == posicionPersonaje[0] && laColumna == posicionPersonaje[1] && laFila==11){
+                        posicionPersonaje[0]=1;
+                    }
+                    if(laFila == posicionPersonaje[0] && laColumna == posicionPersonaje[1] && laColumna==0){
+                        posicionPersonaje[1]=20;
+                    }
+                    if(laFila == posicionPersonaje[0] && laColumna == posicionPersonaje[1] && laColumna==21){
+                        posicionPersonaje[1]=1;
                     }
                     if(laFila == posicionPersonaje[0] && laColumna == posicionPersonaje[1] && unaMatriz[laFila][laColumna] == 0){
                         unaMatriz[laFila][laColumna] = 2;
                         contadorPuntos=contadorPuntos+3;
+                    }
+                    if(laFila == posicionPersonaje[0] && laColumna == posicionPersonaje[1] && unaMatriz[laFila][laColumna] == 3){
+                        unaMatriz[laFila][laColumna] = 2;
+                        contadorInvencibilidad=contadorInvencibilidad+15;
+                        contadorPuntos=contadorPuntos+6;
                     }
                     if (laFila == posicionPersonaje[0] && laColumna == posicionPersonaje[1]) {
                         System.out.print("_P_");
