@@ -19,22 +19,23 @@ public class Pacman {
     };
 
 
-    static int puntos=0;
+    static int puntos = 0;
+
     public static void main(String[] args) {
 
         int[][] elMapa = {
-                { 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 },
-                { 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1 },
-                { 1, 0, 1, 0, 1, 0, 0, 0, 1, 1, 1, 1, 1, 0, 0, 0, 0, 1, 0, 1, 0, 1 },
-                { 1, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 1 },
-                { 1, 0, 1, 1, 1, 1, 0, 1, 1, 1, 0, 1, 1, 1, 1, 0, 1, 1, 1, 1, 0, 1 },
-                { 0, 0, 0, 0, 0, 1, 0, 1, 0, 0, 0, 0, 0, 1, 0, 0, 1, 0, 0, 0, 0, 0 },
-                { 1, 0, 0, 0, 0, 1, 0, 1, 1, 1, 1, 1, 1, 1, 0, 0, 1, 0, 0, 0, 0, 1 },
-                { 1, 0, 1, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 1, 0, 1 },
-                { 1, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 1 },
-                { 1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 1 },
-                { 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1 },
-                { 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 }
+                {1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1},
+                {1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1},
+                {1, 0, 1, 0, 1, 0, 0, 0, 1, 1, 1, 1, 1, 0, 0, 0, 0, 1, 0, 1, 0, 1},
+                {1, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 1},
+                {1, 0, 1, 1, 1, 1, 0, 1, 1, 1, 0, 1, 1, 1, 1, 0, 1, 1, 1, 1, 0, 1},
+                {0, 0, 0, 0, 0, 1, 0, 1, 0, 0, 0, 0, 0, 1, 0, 0, 1, 0, 0, 0, 0, 0},
+                {1, 0, 0, 0, 0, 1, 0, 1, 1, 1, 1, 1, 1, 1, 0, 0, 1, 0, 0, 0, 0, 1},
+                {1, 0, 1, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 1, 0, 1},
+                {1, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 1},
+                {1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 1},
+                {1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1},
+                {1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1}
         };
 
         int[] elPersonaje = {7, 10};
@@ -44,7 +45,7 @@ public class Pacman {
             imprimeMundo(elMapa, elPersonaje, fantasma);
 
             definePosicion(elPersonaje, elMapa);
-        } while ((comprobar(elPersonaje, fantasma) != 1)&&contador(elMapa)!=0);
+        } while ((comprobar(elPersonaje, fantasma) != 1) && contador(elMapa) != 0);
     }
 
 
@@ -65,11 +66,6 @@ public class Pacman {
                 break;
         }
     }
-
-
-
-
-
 
 
     private static int capturaMovimiento() {
@@ -105,12 +101,13 @@ public class Pacman {
             }
             System.out.println();
 
-        }System.out.println("Puntuacion: "+puntos);
+        }
+        System.out.println("Puntuacion: " + puntos);
     }
 
     static void imprimeTerreno(int unTile) {
 
-        String[] terreno = {".", "#", " "};
+        String[] terreno = {".", "#", " ", "X"};
         System.out.print(terreno[unTile]);
     }
 
@@ -128,19 +125,15 @@ public class Pacman {
         int nuevaFila = elPersonaje[FILA] + MOVIMIENTOS[movimiento][FILA];
         int nuevaColumna = elPersonaje[COLUMNA] + MOVIMIENTOS[movimiento][COLUMNA];
 
-            if (elMapa[elPersonaje[FILA]][elPersonaje[COLUMNA]]==0){
-                puntos+=3;
-                elMapa[elPersonaje[FILA]][elPersonaje[COLUMNA]] = 2;
-            }
-
-            elPersonaje[FILA] = nuevaFila;
-            elPersonaje[COLUMNA] = nuevaColumna;
+        if (elMapa[elPersonaje[FILA]][elPersonaje[COLUMNA]] == 0) {
+            puntos += 3;
+            elMapa[elPersonaje[FILA]][elPersonaje[COLUMNA]] = 2;
         }
 
 
-
-
-
+        elPersonaje[FILA] = nuevaFila;
+        elPersonaje[COLUMNA] = nuevaColumna;
+    }
 
 
 
@@ -151,7 +144,6 @@ public class Pacman {
     }
 
 
-
     static int comprobar(int elPersonaje[], int fantasma[][]) {
         if (existeFantasma(elPersonaje[FILA], elPersonaje[COLUMNA], fantasma)) {
             System.out.print("GAME OVER");
@@ -159,7 +151,8 @@ public class Pacman {
         }
         return 0;
     }
-    static int contador( int elMapa [][]) {
+
+    static int contador(int elMapa[][]) {
         int puntitos = 0;
         for (int i = 0; i < elMapa.length; i++) {
             for (int j = 0; j < elMapa.length; j++) {
@@ -169,12 +162,9 @@ public class Pacman {
 
             }
 
-        }return puntitos;
+        }
+        return puntitos;
     }
-
-
-
-
 
 
     static boolean existeFantasma(int f, int c, int[][] fantasma) {
@@ -190,5 +180,23 @@ public class Pacman {
         }
         return false;
 
+    }
+
+    static int invencibilidad(int[] elPersonaje, int[][] elMapa, int[][] fantasma) {
+        int turno = 16;
+        do {
+            for (int i = 0; i < elMapa.length; i++) {
+                for (int j = 0; j < elMapa.length; j++) {
+                    if (elMapa[elPersonaje[FILA]][elPersonaje[COLUMNA]] == 3) {
+                        elMapa[elPersonaje[FILA]][elPersonaje[COLUMNA]] = 2;
+
+                    }
+                }
+                if (elPersonaje[FILA]  fantasma) {
+                    
+                }
+            }
+        } while (turno == 0);
+        return 0;
     }
 }
