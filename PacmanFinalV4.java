@@ -68,8 +68,6 @@ public class PacmanFinalV4 {
                     terminar = true;
                     break;
             }
-            System.out.println(posicionPersonaje[0]);
-            System.out.println(posicionPersonaje[1]);
             turnosinvencible= Invencibilidad(unaMatriz, posicionPersonaje, turnosinvencible);
             pastillascomidas= ComerPastillas(unaMatriz, posicionPersonaje, pastillascomidas);
             
