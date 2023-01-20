@@ -7,8 +7,7 @@ public class PacManV0 {
     static char inputUsuario;
     static boolean terminar = false;
     static int puntuacion = 0;
-    static boolean segundoSuperPoder = false;
-    static int movimientos = 15;
+    static int movimientos = 16;
     static boolean primerSuperPoder = false;
     public static void main(String[] args) {
 
@@ -35,6 +34,7 @@ public class PacManV0 {
         int[] posicionFantasma = { 5, 10 };
 
         do {
+            mostrarMovimientos();
             puntaje();
             imprimeMundo(unaMatriz, posicionPersonaje, posicionFantasma);
             movimiento(posicionPersonaje);
@@ -98,13 +98,20 @@ public class PacManV0 {
         int columnaPersonaje = unPersonaje[COLUMNA];
         int valorMapa;
         valorMapa = unMapa[filaPersonaje][columnaPersonaje];
-        unMapa[filaPersonaje][columnaPersonaje] = 2;
         if(valorMapa==0){
             puntuacion = puntuacion + 3;
+            unMapa[filaPersonaje][columnaPersonaje] = 2;
         }else if(valorMapa == 3 && primerSuperPoder == true ){
+            
             puntuacion = puntuacion + 6;
-            movimientos = movimientos + 15
-        }
+            movimientos = movimientos + 15;
+            unMapa[filaPersonaje][columnaPersonaje] = 2;
+
+        }else if(valorMapa== 3 && primerSuperPoder == false){
+            puntuacion = puntuacion + 6;
+            primerSuperPoder = true;
+            unMapa[filaPersonaje][columnaPersonaje] = 2;
+        } 
     }
 
     static void puntaje(){
@@ -112,10 +119,18 @@ public class PacManV0 {
     }
 
     static int conteoDeMovimientos(){
-        if(superPoder==true){
-            movimientos++;
-        }else{
-            movimientos=0;}
+        if(primerSuperPoder == true){
+            movimientos--;
+            if(movimientos<=0){
+                primerSuperPoder = false;
+                movimientos = 15;
+            }
+        } else{
+            movimientos=15;}
         return movimientos;
+    }
+    static void mostrarMovimientos(){
+        if(primerSuperPoder == true || movimientos<=0)
+        System.out.print("INVENCIBILIDAD:[" + conteoDeMovimientos() + "]");
     }
 }
