@@ -32,7 +32,50 @@ public class Pacman {
             System.out.println("\nPuntos [" + puntos + "]");
             impresionDelMapa(unaMatriz, posicionPersonaje, posicionFantasma, laFila, laColumna);
             inputUsuario = entrada.nextLine().charAt(0);
-            movimientosUsuario(inputUsuario, posicionPersonaje, terminar, unaMatriz, puntos);
+            switch (inputUsuario) {
+                case 's', 'S', '8':
+                    if (unaMatriz[posicionPersonaje[0]][posicionPersonaje[1]] == 0) {
+                        unaMatriz[posicionPersonaje[0]][posicionPersonaje[1]] = 2;
+                        puntos = puntos + 3;
+                    }
+                    if (posicionPersonaje[0] + 1 == laFila) {
+                        posicionPersonaje[0] = 0;
+                    }
+                    posicionPersonaje[0] = posicionPersonaje[0] + 1;
+                    break;
+                case 'w', 'W', '2':
+                    if (unaMatriz[posicionPersonaje[0]][posicionPersonaje[1]] == 0) {
+                        unaMatriz[posicionPersonaje[0]][posicionPersonaje[1]] = 2;
+                        puntos = puntos + 3;
+                    }
+                    if (posicionPersonaje[0] - 1 == 0) {
+                        posicionPersonaje[0] = laFila;
+                    }
+                    posicionPersonaje[0] = posicionPersonaje[0] - 1;
+                    break;
+                case 'a', 'A', '4':
+                    if (unaMatriz[posicionPersonaje[0]][posicionPersonaje[1]] == 0) {
+                        unaMatriz[posicionPersonaje[0]][posicionPersonaje[1]] = 2;
+                        puntos = puntos + 3;
+                    }
+                    if (posicionPersonaje[1] - 1 == 0) {
+                        posicionPersonaje[1] = laColumna;
+                    }
+                    posicionPersonaje[1] = posicionPersonaje[1] - 1;
+                    break;
+                case 'd', 'D', '6':
+                    if (unaMatriz[posicionPersonaje[0]][posicionPersonaje[1]] == 0) {
+                        unaMatriz[posicionPersonaje[0]][posicionPersonaje[1]] = 2;
+                        puntos = puntos + 3;
+                    }
+                    if (posicionPersonaje[1] + 1 == laColumna) {
+                        posicionPersonaje[1] = 0;
+                    }
+                    posicionPersonaje[1] = posicionPersonaje[1] + 1;
+                    break;
+                case 'f', 'F':
+                    terminar = true;
+            }
 
         } while (!terminar);
     }
