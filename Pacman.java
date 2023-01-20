@@ -1,6 +1,9 @@
 import java.util.Scanner;
 // Se mueve
 public class Pacman {
+
+    static final int laFila = 0;
+	static final int laColumna = 1;
     public static void main(String[] args) {
 
         Scanner entrada = new Scanner(System.in);
@@ -37,8 +40,10 @@ public class Pacman {
                             System.out.print(" ");
                         } else if (unaMatriz[laFila][laColumna] == 1) {
                             System.out.print("#");
-                        }
-                    }
+                    //     } else if (unaMatriz[laFila][laColumna] == 2) {
+                    //         System.out.print(" . ");
+                    //     }
+                    // }
                 }
                 System.out.println();
             }
