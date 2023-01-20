@@ -1,6 +1,6 @@
 import java.util.Scanner;
 
-public class ExamenFinal {
+public class Commit1 {
     static int FILA = 0;
     static int COLUMNA = 1;
     static int contadorMonedas=0;
