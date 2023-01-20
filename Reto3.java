@@ -1,6 +1,6 @@
 import java.util.Scanner;
 
-public class pacman {
+public class Pacman {
     public static void main(String[] args) {
 
         Scanner entrada = new Scanner(System.in);
