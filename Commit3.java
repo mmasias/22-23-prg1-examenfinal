@@ -1,6 +1,6 @@
 import java.util.Scanner;
 
-public class ExamenFinal3 {
+public class CxamenFinal3 {
     static int[] elPersonaje = { 7, 10 };
     static int[] elFantasma = { 5, 10 };
     static int FILA = 0;
