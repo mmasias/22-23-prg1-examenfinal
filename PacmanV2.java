@@ -1,6 +1,6 @@
 import java.util.Scanner;
 
-public class PacmanV1 {
+public class PacmanV2 {
 
     static int[][] mapa = {
         { 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 },
@@ -36,12 +36,21 @@ public class PacmanV1 {
     static int FILA = 0;
     static int COLUMNA = 1;
 
+    static int puntos;
+    static int turnosInvencible;
+
+
     public static void main(String[] args) {
         do {
+            imprimirStatus();
             imprimirPantalla();
             inputUsuario = entrada.nextLine().charAt(0);
             moverPersonaje(inputUsuario);
         } while (!terminarJuego);
+    }
+
+    static void imprimirStatus(){
+        System.out.println("Puntos: [" + puntos  + "]");
     }
 
     static void imprimirPantalla () {
@@ -99,6 +108,7 @@ public class PacmanV1 {
         int posicionFutura = mapa[posicionPersonaje[0]][posicionPersonaje[1]];
         if (posicionFutura == 2){
             mapa[posicionAnterior[0]][posicionAnterior[1]] = 0;
+            puntos += 3;
         }
     }
 }
