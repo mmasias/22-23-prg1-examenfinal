@@ -8,7 +8,7 @@ class pacman{
         
         
 		int[][] unMapa = {
-                { 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 },
+                { 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 2, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 },
                 { 1, 4, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 4, 1 },
                 { 1, 2, 1, 2, 1, 2, 2, 2, 1, 1, 1, 1, 1, 2, 2, 2, 2, 1, 2, 1, 2, 1 },
                 { 1, 2, 1, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 1, 2, 1 },
@@ -19,7 +19,7 @@ class pacman{
                 { 1, 2, 1, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 1, 2, 1 },
                 { 1, 2, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 2, 1 },
                 { 1, 4, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 4, 1 },
-                { 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 }
+                { 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 2, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 }
 
         };
 
@@ -62,10 +62,31 @@ class pacman{
 			elPersonajeY = elPersonajeY + 1;
 	    	} else if (inputUsuario.equals("f")) {
 			        return false;
+			
 		}
        
         elPersonaje[0][0] = elPersonajeX;
 		elPersonaje[0][1] = elPersonajeY;
+
+		if (inputUsuario.equals("a") && elPersonajeX==0 && elPersonajeY==5){
+			elPersonajeX=21;
+        }
+
+		if (inputUsuario.equals("d") && elPersonajeX==21 && elPersonajeY==5){
+                elPersonajeX=0;
+        }
+
+		if (inputUsuario.equals("w") && elPersonajeX==10 && elPersonajeY==0){
+                elPersonajeY=11;
+        }
+
+		if (inputUsuario.equals("s") && elPersonajeX==10 && elPersonajeY==11){
+                elPersonajeY=0;
+        }
+       
+        elPersonaje[0][0] = elPersonajeX;
+		elPersonaje[0][1] = elPersonajeY;
+
 
         if(elMapa[elPersonajeY][elPersonajeX]==2){
 			puntos= puntos+3;
@@ -129,18 +150,6 @@ class pacman{
 		}else{ System.out.println("Eres mortal");}
 	}
 
-	private static boolean muerePacman(int[][] elPersonaje, int[][] losNPCs) {
-        for (int unNPC = 0; unNPC < losNPCs.length; unNPC++) {
-            if((elPersonaje[0][0] == losNPCs[unNPC][0]) && (elPersonaje[0][1]== losNPCs[unNPC][1]) && turnosPastilla==0){
-                System.out.println("Pacman murio :( Se termino el juego");
-                return false;
-            }//else if((elPersonaje[0][0] == losNPCs[unNPC][0]) && (elPersonaje[0][1]== losNPCs[unNPC][1]) && turnosPastilla>0){}
-				
-			
-            
-        }
-        return true;
-    }
 
 	private static void imprimePersonaje(){
 		System.out.print(" :v");
