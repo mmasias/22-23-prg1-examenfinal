@@ -1,6 +1,7 @@
 // Pablo Arce de Aldecoa 20/01/2023
 // Examen final de programación I
 
+// Comentar que el unico añadido que se ha hecho, es que cuando interactues con el fantasma siendo invencible, te sume 20 puntos. Ya que no puedes perder, para dar uso a la bola grande.
 
 import java.util.*;
 public class Pacman {
