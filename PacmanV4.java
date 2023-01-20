@@ -115,9 +115,9 @@ public class PacmanV4 {
     static int[] moverToroide(int[] posicionDevuelta) {
         switch (posicionDevuelta[0]) {
             case -1:
-                posicionDevuelta[0] = TAMAÑO_MAPA_X - 1;
+                posicionDevuelta[0] = TAMAÑO_MAPA_Y - 1;
                 break;
-            case TAMAÑO_MAPA_X:
+            case TAMAÑO_MAPA_Y:
                 posicionDevuelta[0] = 0;
                 break;
             default:
@@ -125,7 +125,7 @@ public class PacmanV4 {
         }
         switch (posicionDevuelta[1]) {
             case -1:
-                posicionDevuelta[1] = TAMAÑO_MAPA_Y - 1;
+                posicionDevuelta[1] = TAMAÑO_MAPA_X - 1;
                 break;
             case TAMAÑO_MAPA_X:
                 posicionDevuelta[1] = 0;
