@@ -6,18 +6,18 @@ public class Pacman {
         Scanner entrada = new Scanner(System.in);
         char inputUsuario;
         boolean terminar = false;
-
+        //Añadimos las pastillas de invencibilidad en el mapa para la versión 3
         int[][] unaMatriz = {
                 { 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 },
                 { 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1 },
-                { 1, 0, 1, 0, 1, 0, 0, 0, 1, 1, 1, 1, 1, 0, 0, 0, 0, 1, 0, 1, 0, 1 },
+                { 1, 2, 1, 0, 1, 0, 0, 0, 1, 1, 1, 1, 1, 0, 0, 0, 0, 1, 0, 1, 2, 1 },
                 { 1, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 1 },
                 { 1, 0, 1, 1, 1, 1, 0, 1, 1, 1, 0, 1, 1, 1, 1, 0, 1, 1, 1, 1, 0, 1 },
                 { 0, 0, 0, 0, 0, 1, 0, 1, 0, 0, 0, 0, 0, 1, 0, 0, 1, 0, 0, 0, 0, 0 },
                 { 1, 0, 0, 0, 0, 1, 0, 1, 1, 1, 1, 1, 1, 1, 0, 0, 1, 0, 0, 0, 0, 1 },
                 { 1, 0, 1, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 1, 0, 1 },
                 { 1, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 1 },
-                { 1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 1 },
+                { 1, 2, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 2, 1 },
                 { 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1 },
                 { 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 }
         };
@@ -26,10 +26,13 @@ public class Pacman {
         int[] posicionFantasma = { 5, 10 };
         int[] recorridoPersonaje;
         int pastillaComida = 2;
-        int contador = 0;
+        int contador = 0; //En esta versión se añaden 3 por cada movimiento del personaje, falta corregirlo para que lo haga al comerse cada pastilla
+        int invencibilidad = 0;
 
         // Pastillas añadidas, falta incluir que desaparezcan al ser comidas
         do {
+
+            System.out.println("Puntos: " + "["+ contador + "]" + "/ Invencibilidad: " + "["+ invencibilidad + "]");
             for (int laFila = 0; laFila < unaMatriz.length; laFila++) {
                 for (int laColumna = 0; laColumna < unaMatriz[laFila].length; laColumna++) {
                     if (laFila == posicionPersonaje[0] && laColumna == posicionPersonaje[1]) {                                              
@@ -38,11 +41,13 @@ public class Pacman {
                         System.out.print("F");
                     } else {
                         if (unaMatriz[laFila][laColumna] == 0) {
-                            System.out.print(".");
-                            contador = contador + 3;
+                            System.out.print(".");                           
                         } else if (unaMatriz[laFila][laColumna] == 1) {
                             System.out.print("#");
                         }
+                        else if (unaMatriz[laFila][laColumna] == 2) { //imprime las pastillas de invencibilidad
+                            System.out.print("X");
+                        }                       
                     }
                 }
                 System.out.println();
@@ -64,7 +69,12 @@ public class Pacman {
                     break;
                 case 'f', 'F':
                     terminar = true;
+            }  contador = contador + 3;
+            if(unaMatriz[2][3] == 2){
+                invencibilidad = invencibilidad + 15;
+                contador = contador + 6;
             }
+
         } while (!terminar);
     }
 }
