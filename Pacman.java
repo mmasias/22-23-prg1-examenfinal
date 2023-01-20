@@ -45,19 +45,19 @@ public class Pacman {
 
             inputUsuario = entrada.nextLine().charAt(0);
             switch (inputUsuario) {
-                case 's', 'S', '8':
+                case 's':
                     posicionPersonaje[0] = posicionPersonaje[0] + 1;
                     break;
-                case 'w', 'W', '2':
+                case 'w':
                     posicionPersonaje[0] = posicionPersonaje[0] - 1;
                     break;
-                case 'a', 'A', '4':
+                case 'a':
                     posicionPersonaje[1] = posicionPersonaje[1] - 1;
                     break;
-                case 'd', 'D', '6':
+                case 'd':
                     posicionPersonaje[1] = posicionPersonaje[1] + 1;
                     break;
-                case 'f', 'F':
+                case 'f':
                     terminar = true;
             }
         } while (!terminar);
