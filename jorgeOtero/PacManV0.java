@@ -7,6 +7,9 @@ public class PacManV0 {
     static char inputUsuario;
     static boolean terminar = false;
     static int puntuacion = 0;
+    static boolean segundoSuperPoder = false;
+    static int movimientos = 15;
+    static boolean primerSuperPoder = false;
     public static void main(String[] args) {
 
 
@@ -16,14 +19,14 @@ public class PacManV0 {
         int[][] unaMatriz = {
                 { 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 },
                 { 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1 },
-                { 1, 0, 1, 0, 1, 0, 0, 0, 1, 1, 1, 1, 1, 0, 0, 0, 0, 1, 0, 1, 0, 1 },
+                { 1, 3, 1, 0, 1, 0, 0, 0, 1, 1, 1, 1, 1, 0, 0, 0, 0, 1, 0, 1, 3, 1 },
                 { 1, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 1 },
                 { 1, 0, 1, 1, 1, 1, 0, 1, 1, 1, 0, 1, 1, 1, 1, 0, 1, 1, 1, 1, 0, 1 },
                 { 0, 0, 0, 0, 0, 1, 0, 1, 0, 0, 0, 0, 0, 1, 0, 0, 1, 0, 0, 0, 0, 0 },
                 { 1, 0, 0, 0, 0, 1, 0, 1, 1, 1, 1, 1, 1, 1, 0, 0, 1, 0, 0, 0, 0, 1 },
                 { 1, 0, 1, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 1, 0, 1 },
                 { 1, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 1 },
-                { 1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 1 },
+                { 1, 3, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 3, 1 },
                 { 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1 },
                 { 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 }
         };
@@ -32,7 +35,7 @@ public class PacManV0 {
         int[] posicionFantasma = { 5, 10 };
 
         do {
-
+            puntaje();
             imprimeMundo(unaMatriz, posicionPersonaje, posicionFantasma);
             movimiento(posicionPersonaje);
 
@@ -47,6 +50,7 @@ public class PacManV0 {
             ".",
             "#",
             " ",
+            "X",
         };
         System.out.print(terreno[unNumeroParaTerreno]);
     }
@@ -96,11 +100,22 @@ public class PacManV0 {
         valorMapa = unMapa[filaPersonaje][columnaPersonaje];
         unMapa[filaPersonaje][columnaPersonaje] = 2;
         if(valorMapa==0){
-        puntuacion = puntuacion + 3;
+            puntuacion = puntuacion + 3;
+        }else if(valorMapa == 3 && primerSuperPoder == true ){
+            puntuacion = puntuacion + 6;
+            movimientos = movimientos + 15
         }
     }
 
     static void puntaje(){
-        
+        System.out.println("Puntos: [" + puntuacion + "]");
+    }
+
+    static int conteoDeMovimientos(){
+        if(superPoder==true){
+            movimientos++;
+        }else{
+            movimientos=0;}
+        return movimientos;
     }
 }
