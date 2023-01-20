@@ -42,23 +42,28 @@ public class pacmanversion0 {
                 }
                 System.out.println();
             }
-            
+        
             inputUsuario = entrada.nextLine().charAt(0);
             switch (inputUsuario) {
-                case 's', 'S', '8':
-                    posicionPersonaje[0] = posicionPersonaje[0] + 1;
+                case 's': case 'S': case '8':
+                    if(unaMatriz[posicionPersonaje[0]+1][posicionPersonaje[1]] != 1)
+                        posicionPersonaje[0] = posicionPersonaje[0] + 1;
                     break;
-                case 'w', 'W', '2':
-                    posicionPersonaje[0] = posicionPersonaje[0] - 1;
+                case 'w': case 'W': case '2':
+                    if(unaMatriz[posicionPersonaje[0]-1][posicionPersonaje[1]] != 1)
+                        posicionPersonaje[0] = posicionPersonaje[0] - 1;
                     break;
-                case 'a', 'A', '4':
-                    posicionPersonaje[1] = posicionPersonaje[1] - 1;
+                case 'a': case 'A': case '4':
+                    if(unaMatriz[posicionPersonaje[0]][posicionPersonaje[1]-1] != 1)
+                        posicionPersonaje[1] = posicionPersonaje[1] - 1;
                     break;
-                case 'd', 'D', '6':
-                    posicionPersonaje[1] = posicionPersonaje[1] + 1;
+                case 'd': case 'D': case '6':
+                    if(unaMatriz[posicionPersonaje[0]][posicionPersonaje[1]+1] != 1)
+                        posicionPersonaje[1] = posicionPersonaje[1] + 1;
                     break;
-                case 'f', 'F':
+                case 'q': case 'Q':
                     terminar = true;
+                    break;
             }
         } while (!terminar);
     }
