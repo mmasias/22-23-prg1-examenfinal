@@ -1,13 +1,16 @@
 import java.util.Scanner;
 
-public class PacmanV1Santiago {
+public class PacmanBosquejo {
     public static void main(String[] args) {
 
         Scanner entrada = new Scanner(System.in);
         char inputUsuario;
         boolean terminar = false;
 
+        
+
         int[][] unaMatriz = {
+                
                 { 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 },
                 { 1, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 1 },
                 { 1, 2, 1, 2, 1, 2, 2, 2, 1, 1, 1, 1, 1, 2, 2, 2, 2, 1, 2, 1, 2, 1 },
@@ -24,32 +27,31 @@ public class PacmanV1Santiago {
 
         int[] posicionPersonaje = { 7, 10 };
         int[] posicionFantasma = { 5, 10 };
+        int puntos = 0;
 
         do {
+            System.out.println("Pts: ["+ puntos +"] / Inv: ["/*+invensibilidad+*/+"]");
             for (int laFila = 0; laFila < unaMatriz.length; laFila++) {
                 for (int laColumna = 0; laColumna < unaMatriz[laFila].length; laColumna++) {
                     if (laFila == posicionPersonaje[0] && laColumna == posicionPersonaje[1]) {
-                        int personaje;
-                        System.out.print("P");
+                        System.out.print("P") ;
                     } else if (laFila == posicionFantasma[0] && laColumna == posicionFantasma[1]) {
                         System.out.print("F");
-                    } else {
+                    } else {    
                         if (unaMatriz[laFila][laColumna] == 0) {
-                            int vacio = 0;
                             System.out.print(" ");
                         } else if (unaMatriz[laFila][laColumna] == 1) {
-                            int muro = 1;
                             System.out.print("#");
                         }else if (unaMatriz[laFila][laColumna] == 2) {
-                            int pastilla;
-                            pastilla = 2;
                             System.out.print(".");
                         }
                     }
+
                     
                 }
                 System.out.println();
             }
+            
 
             inputUsuario = entrada.nextLine().charAt(0);
             switch (inputUsuario) {
@@ -68,6 +70,11 @@ public class PacmanV1Santiago {
                 case 'f', 'F':
                     terminar = true;
             }
+
+            if (unaMatriz[posicionPersonaje[1]][posicionPersonaje[0]] == 2) {
+                unaMatriz[posicionPersonaje[1]][posicionPersonaje[0]] = 0;
+                puntos++;
+            } 
         } while (!terminar);
     }
 }
