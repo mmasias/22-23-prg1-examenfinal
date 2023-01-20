@@ -86,14 +86,17 @@ public class PacmanFinalV3 {
     }
 
     static int ComerPastillas(int[][] unaMatriz, int[] posicionPersonaje, int pastillascomidas){
-        if(unaMatriz[posicionPersonaje[0]][posicionPersonaje[1]]== 2){
-            unaMatriz[posicionPersonaje[0]][posicionPersonaje[1]] = 0;
-            pastillascomidas++;
-        }
-        else if(unaMatriz[posicionPersonaje[0]][posicionPersonaje[1]]== 3){
-            unaMatriz[posicionPersonaje[0]][posicionPersonaje[1]] = 0;
-            pastillascomidas= pastillascomidas+2;
-        }
+        if(posicionPersonaje[0] > 0 && posicionPersonaje[0] < 12 && posicionPersonaje[1] > 0 && posicionPersonaje[1] < 22){
+            if(unaMatriz[posicionPersonaje[0]][posicionPersonaje[1]]== 2){
+                unaMatriz[posicionPersonaje[0]][posicionPersonaje[1]] = 0;
+                pastillascomidas++;
+            }
+            else if(unaMatriz[posicionPersonaje[0]][posicionPersonaje[1]]== 3){
+                unaMatriz[posicionPersonaje[0]][posicionPersonaje[1]] = 0;
+                pastillascomidas= pastillascomidas+2;
+            }
+            }
+        
         return pastillascomidas;
     }
 
@@ -108,13 +111,17 @@ public class PacmanFinalV3 {
     }
 
     static int Invencibilidad(int[][] unaMatriz, int[] posicionPersonaje, int turnosinvencible){
-        if(unaMatriz[posicionPersonaje[0]][posicionPersonaje[1]]== 3){
-            turnosinvencible = turnosinvencible + 15;
-        }
-        else if(turnosinvencible > 0){
-            turnosinvencible--;
-        }
-        else{}
+        if(posicionPersonaje[0] > 0 && posicionPersonaje[0] < 12 && posicionPersonaje[1] > 0 && posicionPersonaje[1] < 22){
+            if(unaMatriz[posicionPersonaje[0]][posicionPersonaje[1]]== 2){
+                if(unaMatriz[posicionPersonaje[0]][posicionPersonaje[1]]== 3){
+                    turnosinvencible = turnosinvencible + 15;
+                }
+                else if(turnosinvencible > 0){
+                    turnosinvencible--;
+                }
+                else{}
+            }
+            }
         return turnosinvencible;
     }
 }

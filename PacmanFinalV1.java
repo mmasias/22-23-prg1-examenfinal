@@ -79,8 +79,10 @@ public class PacmanFinalV1 {
     }
 
     static void ComerPastillas(int[][] unaMatriz, int[] posicionPersonaje){
+        if(posicionPersonaje[0] > 0 && posicionPersonaje[0] < 12 && posicionPersonaje[1] > 0 && posicionPersonaje[1] < 22){
         if(unaMatriz[posicionPersonaje[0]][posicionPersonaje[1]]== 2){
             unaMatriz[posicionPersonaje[0]][posicionPersonaje[1]] = 0;
+        }
         }
     }
 }
