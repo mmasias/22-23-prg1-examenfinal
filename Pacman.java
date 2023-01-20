@@ -21,45 +21,56 @@ public class Pacman {
                 { 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1 },
                 { 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 }
         };
+        int laFila = 12;
+        int laColumna = 22;
 
         int[] posicionPersonaje = { 7, 10 };
         int[] posicionFantasma = { 5, 10 };
 
         do {
-            for (int laFila = 0; laFila < unaMatriz.length; laFila++) {
-                for (int laColumna = 0; laColumna < unaMatriz[laFila].length; laColumna++) {
-                    if (laFila == posicionPersonaje[0] && laColumna == posicionPersonaje[1]) {
-                        System.out.print("P");
-                    } else if (laFila == posicionFantasma[0] && laColumna == posicionFantasma[1]) {
-                        System.out.print("F");
-                    } else {
-                        if (unaMatriz[laFila][laColumna] == 0) {
-                            System.out.print(" ");
-                        } else if (unaMatriz[laFila][laColumna] == 1) {
-                            System.out.print("#");
-                        }
+            impresionDelMapa(unaMatriz, posicionPersonaje, posicionFantasma, laFila, laColumna);
+            inputUsuario = entrada.nextLine().charAt(0);
+            movimientosUsuario(inputUsuario, posicionPersonaje, terminar);
+        } while (!terminar);
+    }
+
+    static void movimientosUsuario(char inputUsuario, int[] posicionPersonaje, boolean terminar) {
+        switch (inputUsuario) {
+            case 's', 'S', '8':
+                posicionPersonaje[0] = posicionPersonaje[0] + 1;
+
+                break;
+            case 'w', 'W', '2':
+                posicionPersonaje[0] = posicionPersonaje[0] - 1;
+                break;
+            case 'a', 'A', '4':
+                posicionPersonaje[1] = posicionPersonaje[1] - 1;
+                break;
+            case 'd', 'D', '6':
+                posicionPersonaje[1] = posicionPersonaje[1] + 1;
+                break;
+            case 'f', 'F':
+                terminar = true;
+        }
+    }
+
+    static void impresionDelMapa(int[][] unaMatriz, int[] posicionPersonaje, int[] posicionFantasma, int laFila,
+            int laColumna) {
+        for (laFila = 0; laFila < unaMatriz.length; laFila++) {
+            for (laColumna = 0; laColumna < unaMatriz[laFila].length; laColumna++) {
+                if (laFila == posicionPersonaje[0] && laColumna == posicionPersonaje[1]) {
+                    System.out.print("P");
+                } else if (laFila == posicionFantasma[0] && laColumna == posicionFantasma[1]) {
+                    System.out.print("F");
+                } else {
+                    if (unaMatriz[laFila][laColumna] == 0) {
+                        System.out.print(".");
+                    } else if (unaMatriz[laFila][laColumna] == 1) {
+                        System.out.print("#");
                     }
                 }
-                System.out.println();
             }
-
-            inputUsuario = entrada.nextLine().charAt(0);
-            switch (inputUsuario) {
-                case 's', 'S', '8':
-                    posicionPersonaje[0] = posicionPersonaje[0] + 1;
-                    break;
-                case 'w', 'W', '2':
-                    posicionPersonaje[0] = posicionPersonaje[0] - 1;
-                    break;
-                case 'a', 'A', '4':
-                    posicionPersonaje[1] = posicionPersonaje[1] - 1;
-                    break;
-                case 'd', 'D', '6':
-                    posicionPersonaje[1] = posicionPersonaje[1] + 1;
-                    break;
-                case 'f', 'F':
-                    terminar = true;
-            }
-        } while (!terminar);
+            System.out.println();
+        }
     }
 }
