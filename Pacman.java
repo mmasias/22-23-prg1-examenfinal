@@ -2,11 +2,9 @@ import java.util.Scanner;
 
 public class Pacman {
     
-    public static void main(String[] args) {
+    private static int puntos = 0;
 
-        Scanner entrada = new Scanner(System.in);
-        char inputUsuario;
-        boolean terminar = false;
+    public static void main(String[] args) {
 
         int[][] elMapa = {
                 { 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 },
@@ -29,24 +27,6 @@ public class Pacman {
         do {
             imprimeMapa(elMapa, elPersonaje, fantasma1);
 			
-            // for (int laFila = 0; laFila < unaMatriz.length; laFila++) {
-            //     for (int laColumna = 0; laColumna < unaMatriz[laFila].length; laColumna++) {
-            //             if (laFila == pacman[0] && laColumna == pacman[1]) {
-            //             System.out.print("P");
-            //         } else if (laFila == posicionFantasma[0] && laColumna == posicionFantasma[1]) {
-            //             System.out.print("F");
-            //         } else {
-            //             if (unaMatriz[laFila][laColumna] == 0) {
-            //                 System.out.print(" ");
-            //             } else if (unaMatriz[laFila][laColumna] == 1) {
-            //                 System.out.print("#");
-            //             }
-            //         }
-            //     }
-            //     System.out.println();
-            // }
-
-            
         } while (movimientoPacman(elMapa, elPersonaje));
     }
 
@@ -122,18 +102,51 @@ public class Pacman {
 		switch (unaDireccion) {
                     case "ABAJO":
                         pacman[1] = pacman[1] + 1;
+
+                        if(elMapa[pacman[1]][pacman[0]] == 0)
+                        {
+                            elMapa[pacman[1]][pacman[0]] = 2;
+                            puntos += 3;
+                        }
                         break;
                     case "ARRIBA":
                         pacman[1] = pacman[1] - 1;
+                        
+                        if(elMapa[pacman[1]][pacman[0]] == 0)
+                        {
+                            elMapa[pacman[1]][pacman[0]] = 2;
+                            puntos += 3;
+                        }
+
                         break;
                     case "IZQUIERDA":
                         pacman[0] = pacman[0] - 1;
+                        
+                        if(elMapa[pacman[1]][pacman[0]] == 0)
+                        {
+                            elMapa[pacman[1]][pacman[0]] = 2;
+                            puntos += 3;
+                        }
+
                         break;
                     case "DERECHA":
                         pacman[0] = pacman[0] + 1;
+                        
+                        if(elMapa[pacman[1]][pacman[0]] == 0)
+                        {
+                            elMapa[pacman[1]][pacman[0]] = 2;
+                            puntos += 3;
+                        }
+
                         break;
                 }
+
+                
 	}
+
+    private static void dibujaPuntos() {
+		System.out.println("Tienes [ "+ puntos +" ] puntos");
+    }
 
     private static void imprimeMapa(int[][] mapa, int[] pacman, int[] fantasma1) {
 
@@ -154,6 +167,7 @@ public class Pacman {
 			System.out.println();
 		}
 		System.out.println();
+        dibujaPuntos();
 		System.out.println("Utilice las teclas WASD y luego presione Enter para moverse por el mapa.");
 
 	}
