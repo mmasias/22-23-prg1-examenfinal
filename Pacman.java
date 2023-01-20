@@ -3,7 +3,7 @@ import java.util.Random;
 
 public class Pacman {
 
-    private static int puntos = 0, poder = 6, cuenta = 0;
+    private static int puntos = 0, poder = 3, cuenta = 0, skin = 0;
 
     public static void main(String[] args) {
         int[][] unaMatrunaMatriz = {
@@ -25,12 +25,12 @@ public class Pacman {
         int[] fantasma = { 5, 10 };
 
         do {
-            mundo(unaMatrunaMatriz, pacman, fantasma); // se crea el unaMatrunaMatriza de pacman
+            mundo(unaMatrunaMatriz, pacman, fantasma); 
 
         } while (comandosPacman(unaMatrunaMatriz, pacman));
     }
 
-    private static void dibujarBordeL(boolean borde) { // Se imprime el borde de los lados (izquierda y derecha)
+    private static void dibujarBordeL(boolean borde) {
 
         System.out.print("|");
         if (borde) {
@@ -39,21 +39,15 @@ public class Pacman {
 
     }
 
-    private static void dibujarPacman() { // Se bosqueja el pacman
+    private static void dibujarPacman() {
         System.out.print("P");
     }
 
-    private static void fruta() { // Se bosqueja la fruta
-        System.out.print("X");
-    }
-
-    private static void dibujarfantasma() { // Se bosqueja fantasma
+    private static void dibujarfantasma() { 
         System.out.print("F");
     }
 
-
-    private static boolean comandosPacman(int[][] unaMatrunaMatriz, int[] pacman) { // Comandos de uso de pacman w a s d | f
-
+    private static boolean comandosPacman(int[][] unaMatrunaMatriz, int[] pacman) { 
         Scanner entrada = new Scanner(System.in);
         String inputUsuario;
         char direccion = ' ';
@@ -69,6 +63,8 @@ public class Pacman {
             direccion = 'S';
         } else if (inputUsuario.equals("d")) {
             direccion = 'E';
+        } else if (inputUsuario.equals("v")) {
+            skin = 2;
         } else {
             System.out.println("No es una tecla valida");
         }
@@ -112,10 +108,9 @@ public class Pacman {
 
         puntos(pacman, unaMatrunaMatriz);
         poderPacman(pacman, unaMatrunaMatriz);
-        fruta(pacman, unaMatrunaMatriz);
     }
 
-    private static void puntos(int[] pacman, int[][] unaMatrunaMatriz) { // Puntos del juego
+    private static void puntos(int[] pacman, int[][] unaMatrunaMatriz) { 
         if (unaMatrunaMatriz[pacman[1]][pacman[0]] == 0) {
             unaMatrunaMatriz[pacman[1]][pacman[0]] = 2;
             puntos++;
@@ -126,27 +121,14 @@ public class Pacman {
         }
     }
 
-    private static void poderPacman(int[] pacman, int[][] unaMatrunaMatriz) { // Variable Poder
+    private static void poderPacman(int[] pacman, int[][] unaMatrunaMatriz) { 
 
         if (unaMatrunaMatriz[pacman[1]][pacman[0]] == 6) {
             for (int i = 0; i <= poder; i = i - 1) {
                 System.out.println("ERES IMPARABLE!!!");
-                poder = poder - 1;
+                poder = poder - 3;
             }
             System.out.println("Oh no, perdiste tu poder");
-        }
-    }
-
-    private static void fruta(int[] pacman, int[][] unaMatrunaMatriz) { // Variable fruta
-        do {
-            cuenta = cuenta + 1;
-        } while (cuenta == 80);
-        {
-            fruta();
-            if (unaMatrunaMatriz[pacman[1]][pacman[0]] == 4) {
-                unaMatrunaMatriz[pacman[1]][pacman[0]] = 2;
-                puntos = puntos + 10;
-            }
         }
     }
 
@@ -165,21 +147,56 @@ public class Pacman {
             }
             dibujarBordeL(true);
         }
+            puntos(pacman);
     }
 
-    private static void elementos(int elementosDelunaMatrunaMatriza) { // Variable elementos
+    private static void cambiarmundo() { 
+        if (inputUsuario.equals("v")) {
+            skinactual = conjuntoDeElementosDos;
+        } else if {
+            skinactual = conjuntoDeElementosUno;
+        }
+    }
 
-        String[] conjuntoDeElementos = {
+    private static void elementos(int elementosDelunaMatrunaMatriza) {
+
+        String[] conjuntoDeElementosUno = {
                 ".",
                 "#",  // Bordes Skin 1
                 " ", // Vacio
                 "- -",
-                "0", // fruta
                 "",
                 "0", // poder
                 "F", // fantasma
 
         };
-        System.out.print(conjuntoDeElementos[elementosDelunaMatrunaMatriza]);
+        String[] conjuntoDeElementosDos = {
+                " o ",
+                "###",  // Bordes Skin 2
+                "   ", // Vacio
+                "- -",
+                "   ",
+                " x ", // poder
+                "FFF", // fantasma
+
+        };
+        String[] conjuntoDeElementosTres = {
+                "()",
+                "##",  // Bordes Skin 3
+                "  ", // Vacio
+                "- -",
+                "  ",
+                "><", // poder
+                "FF", // fantasma
+
+        };
+        System.out.print(conjuntoDeElementosDos[elementosDelunaMatrunaMatriza]);
+    }
+    private static void puntos(int[] pacman) {
+
+        System.out.println("| Finalizar: f |");
+        System.out.println("| Puntos: " + puntos + " |");
+        System.out.println("| Numero de movimientos: " + cuenta + " |");
+        System.out.println("| Skin: " + skin +" |");
     }
 }
