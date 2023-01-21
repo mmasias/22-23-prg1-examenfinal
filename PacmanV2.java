@@ -1,17 +1,19 @@
 import java.util.Scanner;
 
-public class Pacman {
+public class PacmanV2 {
 
     static final String DIBUJO_JUGADOR = " P ";
     static final String DIBUJO_FANTASMA = " F ";
     static final String DIBUJO_PARED = "[ ]";
     static final String DIBUJO_PASTILLA = " . ";
     static final String DIBUJO_AIRE = "   ";
-    
+
     static boolean terminar = false;
 
-    public static void main(String[] args) {
+    static final int PUNTOS_POR_PASTILLA = 3;
+    static int puntosTotales = 0;
 
+    public static void main(String[] args) {
         int[][] unaMatriz = {
                 { 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 },
                 { 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1 },
@@ -26,14 +28,21 @@ public class Pacman {
                 { 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1 },
                 { 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 }
         };
-
         int[] posicionPersonaje = { 7, 10 };
         int[] posicionFantasma = { 5, 10 };
 
         do {
+            dibujarEncabezado();
             dibujarJuego(unaMatriz, posicionPersonaje, posicionFantasma);
             moverJugador(posicionPersonaje);
+            unaMatriz = modificacionMapa(unaMatriz, posicionPersonaje);
         } while (!terminar);
+    }
+
+    static void dibujarEncabezado() {
+        System.out.println();
+        System.out.println(" PUNTOS: [" + puntosTotales + "]");
+        System.out.println();
     }
 
     static void dibujarJuego(int[][] mapa, int[] posicionJugador, int[] posicionFantasma) {
@@ -85,6 +94,23 @@ public class Pacman {
             case 'f', 'F':
                 terminar = true;
         }
-        entrada.close();
     }
+
+    static int[][] modificacionMapa(int[][] mapa, int[] posicionJugador) {
+        int[][] mapaMod = mapa;
+        if(comePastilla(mapa, posicionJugador)){
+            mapaMod[posicionJugador[0]][posicionJugador[1]] = 2;
+        }
+        return mapaMod;
+    }
+
+    static boolean comePastilla(int[][] mapa, int[] posicionJugador){
+        if(mapa[posicionJugador[0]][posicionJugador[1]]==0){
+            puntosTotales += PUNTOS_POR_PASTILLA;
+            return true;
+        }
+        return false;
+    }
+
+
 }
