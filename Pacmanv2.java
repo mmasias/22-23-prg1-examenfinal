@@ -6,18 +6,20 @@ public class Pacman{
         Scanner entrada = new Scanner(System.in);
         char inputUsuario;
         boolean terminar = false;
+        int puntos = 0;
+        int invencibilidad = 0;
 
         int[][] unaMatriz = {
                 { 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 },
                 { 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1 },
-                { 1, 0, 1, 0, 1, 0, 0, 0, 1, 1, 1, 1, 1, 0, 0, 0, 0, 1, 0, 1, 0, 1 },
+                { 1, 2, 1, 0, 1, 0, 0, 0, 1, 1, 1, 1, 1, 0, 0, 0, 0, 1, 0, 1, 2, 1 },
                 { 1, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 1 },
                 { 1, 0, 1, 1, 1, 1, 0, 1, 1, 1, 0, 1, 1, 1, 1, 0, 1, 1, 1, 1, 0, 1 },
                 { 0, 0, 0, 0, 0, 1, 0, 1, 0, 0, 0, 0, 0, 1, 0, 0, 1, 0, 0, 0, 0, 0 },
                 { 1, 0, 0, 0, 0, 1, 0, 1, 1, 1, 1, 1, 1, 1, 0, 0, 1, 0, 0, 0, 0, 1 },
                 { 1, 0, 1, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 1, 0, 1 },
                 { 1, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 1 },
-                { 1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 1 },
+                { 1, 2, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 2, 1 },
                 { 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1 },
                 { 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 }
         };
@@ -26,6 +28,8 @@ public class Pacman{
         int[] posicionFantasma = { 5, 10 };
 
         do {
+
+            System.out.println("Puntos: ["+puntos+"] / Invencibilidad: ["+invencibilidad+"]");
             for (int laFila = 0; laFila < unaMatriz.length; laFila++) {
                 for (int laColumna = 0; laColumna < unaMatriz[laFila].length; laColumna++) {
                     if (laFila == posicionPersonaje[0] && laColumna == posicionPersonaje[1]) {
@@ -37,6 +41,8 @@ public class Pacman{
                             System.out.print(".");
                         } else if (unaMatriz[laFila][laColumna] == 1) {
                             System.out.print("#");
+                        } else if (unaMatriz[laFila][laColumna] ==2) {
+                            System.out.print("*");
                         } else {
                             System.out.print(" ");
                         }
@@ -63,14 +69,32 @@ public class Pacman{
                     terminar = true;
             }
 
+            switch (posicionPersonaje[0]){
+                case -1:
+                posicionPersonaje[0] = unaMatriz.length;
+                case 22:
+                posicionPersonaje[0] = 0;
+
+            }
+
+            if (invencibilidad!=0){
+                invencibilidad = invencibilidad - 1;
+            }
+
+
             for (int laFila = 0; laFila < unaMatriz.length; laFila++) {
                 for (int laColumna = 0; laColumna < unaMatriz[laFila].length; laColumna++) {
                     if (laFila == posicionPersonaje[0] && laColumna == posicionPersonaje[1] && unaMatriz[laFila][laColumna] == 0) {
                         unaMatriz [laFila][laColumna] = -1;
+                        puntos = puntos + 3;
+                    }
+                    if (laFila == posicionPersonaje[0] && laColumna == posicionPersonaje[1] && unaMatriz[laFila][laColumna] == 2) {
+                        unaMatriz [laFila][laColumna] = -1;
+                        puntos = puntos + 6;
+                        invencibilidad = invencibilidad + 15;
                     }
                 }
             }
-        
         } while (!terminar);
     }
 }
