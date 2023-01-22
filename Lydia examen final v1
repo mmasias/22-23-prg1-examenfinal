@@ -1,0 +1,180 @@
+import java.util.Scanner;
+import java.util.Random;
+
+public class v1 {
+    static final int FILA = 0;
+	static final int COLUMNA = 1;
+
+	static final int ARRIBA = 0;
+	static final int ABAJO = 1;
+	static final int IZQUIERDA = 2;
+	static final int DERECHA = 3;
+
+
+	static final int[][] MOVIMIENTO = {
+		{-1,0}, //w
+		{1,0},//s
+		{0,-1},//a
+		{0,1} //d
+	};
+
+	public static void main(String[] args) {
+
+		int[][] elMapa = {	
+            { 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 },
+            { 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1 },
+            { 1, 0, 1, 0, 1, 0, 0, 0, 1, 1, 1, 1, 1, 0, 0, 0, 0, 1, 0, 1, 0, 1 },
+            { 1, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 1 },
+            { 1, 0, 1, 1, 1, 1, 0, 1, 1, 1, 0, 1, 1, 1, 1, 0, 1, 1, 1, 1, 0, 1 },
+            { 0, 0, 0, 0, 0, 1, 0, 1, 0, 0, 0, 0, 0, 1, 0, 0, 1, 0, 0, 0, 0, 0 },
+            { 1, 0, 0, 0, 0, 1, 0, 1, 1, 1, 1, 1, 1, 1, 0, 0, 1, 0, 0, 0, 0, 1 },
+            { 1, 0, 1, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 1, 0, 1 },
+            { 1, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 1 },
+            { 1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 1 },
+            { 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1 },
+            { 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 }
+
+		};
+
+		int [] elPersonaje = {3,10};
+        int [] fantasmaAleatorio1 ={1,1};
+        int [] Pastilla1 ={1,5};
+
+        //SIEMPRE IMPRIME EL MUNDO
+		do {
+            Random rand = new Random();
+         int PastillaAleatoria1 = rand.nextInt(4) + 1;
+         
+        
+            //LLAMA A LA FUNCION imprimeMundo Y LE PASA PARAMETROS DE MAPA Y PERSONAJE
+			imprimeMundo(elMapa, elPersonaje,fantasmaAleatorio1, Pastilla1);
+            // LLAMA A LA FUNCION mover Y LE PASA COMO PARAMATEROS ELPERSONAJE Y LA FUNCION preguntaAdonde
+			mover(elMapa,elPersonaje, preguntaAdonde());
+		} while(elPersonaje != fantasmaAleatorio1);
+        System.out.print("El fantasma te ha comido");
+          if(elPersonaje != Pastilla1){
+            System.out.print("El PacMan ha comido una pastilla");
+            
+          }
+       
+        }
+
+	//PREGUNTA A DONDE VAS Y LLAMA A LA FUNCION DE PREGUNTAINT
+	static int preguntaAdonde(){
+
+		System.out.println("Adonde vas? 1-ARRIBA 2-ABAJO 3-IZQUIERDA 4-DERECHA");
+		return preguntaInt();
+	}
+    //FUNCION DE PREGUNTA INT /PASA UN NUMERO PARA ADMINISTRAR HACIA DONDE VA EL MOVIMIENTO
+	static int preguntaInt(){
+
+		Scanner entrada = new Scanner(System.in);
+		return entrada.nextInt(); 
+	}
+    //?
+	static String pregunta(){
+
+		Scanner entrada = new Scanner(System.in);
+		return entrada.nextLine(); 
+	}
+	//LE SUMA EL MOVIMIENTO PASA PARAMETROS POSICION DEL PERSONAJE Y LA DIRECCION (LA DIRECCION LE PASAS LA FUNCION DE preguntaAdonde EN EL DO)
+    //AQUI ADMINISTRAS EL MOVIMIENTO Y HACIA DONDE QUIERES IR
+    static void mover(int[][] elMapa,int[] unPersonaje, int direccion){
+        
+        if(direccion==1){
+            int nuevaFila = unPersonaje[FILA] +=  MOVIMIENTO[0][FILA];
+            int nuevaColumna = unPersonaje[COLUMNA] += MOVIMIENTO[0][COLUMNA];
+            if(elMapa[nuevaFila][nuevaColumna]==0){
+                unPersonaje[FILA] +=  MOVIMIENTO[0][FILA];
+            }else {
+                unPersonaje[FILA] +=  MOVIMIENTO[direccion][FILA];
+
+            }
+        
+
+        }else if(direccion==2){
+            int nuevaFila = unPersonaje[FILA] +=  MOVIMIENTO[1][FILA];
+            int nuevaColumna = unPersonaje[COLUMNA] += MOVIMIENTO[1][COLUMNA];
+            
+            if(elMapa[nuevaFila][nuevaColumna]== 0){
+                unPersonaje[FILA] +=  MOVIMIENTO[1][FILA];
+               
+            }else{
+                unPersonaje[FILA] +=  MOVIMIENTO[direccion][FILA];
+            }
+        }else if (direccion==3){
+            int nuevaFila = unPersonaje[FILA] +=  MOVIMIENTO[2][FILA];
+            int nuevaColumna = unPersonaje[COLUMNA] += MOVIMIENTO[2][COLUMNA];
+            if(elMapa[nuevaFila][nuevaColumna]==0){
+                unPersonaje[COLUMNA] += MOVIMIENTO[2][COLUMNA];
+            }else{
+                unPersonaje[COLUMNA] += MOVIMIENTO[direccion][COLUMNA];
+            }
+        }else if (direccion==4){
+            int nuevaFila = unPersonaje[FILA] +=  MOVIMIENTO[3][FILA];
+            int nuevaColumna =unPersonaje[COLUMNA] += MOVIMIENTO[3][COLUMNA];
+            if(elMapa[nuevaFila][nuevaColumna]==0){
+                unPersonaje[COLUMNA] += MOVIMIENTO[3][COLUMNA];
+            }else{
+                unPersonaje[COLUMNA] += MOVIMIENTO[direccion][COLUMNA];
+            }
+        }
+    }  
+    
+
+    
+       
+    
+	//IMPRIME EL MUNDO CON PARAMETROS DE MAPA Y PERSONAJE 
+	static void imprimeMundo(int[][] unMapa, int[] unPersonaje,int[] fantasmaAleatorio1,int[] Pastilla1){
+        
+		
+			for (int fila=0; fila<unMapa.length; fila++){
+				for (int columna=0; columna<unMapa[fila].length; columna++) {
+					if (fila==unPersonaje[FILA] && columna==unPersonaje[COLUMNA]) {
+						imprimePersonaje();
+                        
+					} else if (fila==fantasmaAleatorio1[FILA] && columna==fantasmaAleatorio1[COLUMNA]){
+                        imprimeFantasma1();
+                    
+                    }else{
+						imprimeTerreno(unMapa[fila][columna]);
+					}
+				}
+            }System.out.println();
+			}
+	
+
+    
+
+
+
+    
+    //IMPRIME EL TERRENO
+	static void imprimeTerreno(int unTile){
+		
+		String[] terreno = {
+			" . ",
+			"[#]",
+			
+		};
+		System.out.print(terreno[unTile]);
+	}
+    //IMPRIME EL PERSONAJE
+	static void imprimePersonaje(){
+		System.out.print("_O_");
+	}
+    static void imprimeFantasma1(){
+        System.out.print("F1");
+    }
+        
+    static void imprimePastilla1(){
+            System.out.print("[P1]");
+        
+    }
+   
+    
+
+}
+    
+
